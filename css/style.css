@@ -1,0 +1,1284 @@
+/* ==========================================================================
+   GREEN TECHNOLOGY CLUB - style.css
+   Shared stylesheet for all six pages.
+
+   Created by  : Member 1
+   Used by     : Member 1, Member 2, Member 3
+
+   TABLE OF CONTENTS
+   01. Design tokens (colours, spacing, fonts)
+   02. Base elements
+   03. Accessibility helpers (skip link, focus styles)
+   04. Navbar
+   05. Welcome bar (cookie feature)
+   06. Buttons
+   07. Section layout helpers
+   08. Hero section
+   09. Cards
+   10. Event highlight
+   11. Call to action band
+   12. Footer
+   13. Cookie banner
+   14. Animations
+   15. Responsive rules (media queries)
+   16. Reserved space for Member 2 and Member 3
+   ========================================================================== */
+
+
+/* ==========================================================================
+   01. DESIGN TOKENS
+   All colours and sizes are stored as CSS variables so every page uses
+   exactly the same values. Change a value here and the whole site updates.
+   ========================================================================== */
+:root {
+  /* Brand colours */
+  --gtc-forest: #14532D;   /* deepest green - dark surfaces and headings */
+  --gtc-green: #2E7D32;    /* primary brand green */
+  --gtc-leaf: #66BB6A;     /* light green - highlights */
+  --gtc-pale: #E9F3EA;     /* very light green - section backgrounds */
+  --gtc-solar: #F2A900;    /* solar amber - used only for main actions */
+
+  /* Neutral colours */
+  --gtc-ink: #1C2321;      /* main body text */
+  --gtc-muted: #5A6B62;    /* secondary text */
+  --gtc-line: #DCE5DD;     /* borders and dividers */
+  --gtc-white: #FFFFFF;
+  --gtc-off-white: #F6F9F6;
+
+  /* Typography - system fonts only, no external font files */
+  --gtc-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                   "Helvetica Neue", Arial, sans-serif;
+  --gtc-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas,
+                   "Courier New", monospace;
+
+  /* Shape and depth */
+  --gtc-radius: 14px;
+  --gtc-radius-sm: 8px;
+  --gtc-shadow: 0 4px 16px rgba(20, 83, 45, 0.08);
+  --gtc-shadow-lg: 0 12px 32px rgba(20, 83, 45, 0.14);
+
+  /* Vertical rhythm */
+  --gtc-section-space: 5rem;
+}
+
+
+/* ==========================================================================
+   02. BASE ELEMENTS
+   ========================================================================== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--gtc-font-body);
+  color: var(--gtc-ink);
+  background-color: var(--gtc-white);
+  line-height: 1.7;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--gtc-forest);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+/* clamp() sets a minimum size, a preferred size that scales with the screen
+   width, and a maximum size - all in one line. */
+h1 { font-size: clamp(2rem, 5vw, 3.25rem); font-weight: 800; }
+h2 { font-size: clamp(1.6rem, 3.2vw, 2.25rem); }
+h3 { font-size: 1.25rem; }
+
+p  { color: var(--gtc-ink); }
+
+a {
+  color: var(--gtc-green);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--gtc-forest);
+  text-decoration: underline;
+}
+
+/* Elements with the hidden attribute must never be displayed. */
+[hidden] {
+  display: none !important;
+}
+
+
+/* ==========================================================================
+   03. ACCESSIBILITY HELPERS
+   ========================================================================== */
+
+/* The skip link is hidden until a keyboard user presses Tab, which lets them
+   jump straight to the main content without tabbing through the whole menu. */
+.gtc-skip-link {
+  position: absolute;
+  top: -60px;
+  left: 1rem;
+  z-index: 2000;
+  padding: 0.65rem 1.25rem;
+  background-color: var(--gtc-forest);
+  color: var(--gtc-white);
+  border-radius: 0 0 var(--gtc-radius-sm) var(--gtc-radius-sm);
+  transition: top 0.2s ease;
+}
+
+.gtc-skip-link:focus {
+  top: 0;
+  color: var(--gtc-white);
+  text-decoration: none;
+}
+
+/* A clear, high-contrast outline for every keyboard-focused control. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--gtc-solar);
+  outline-offset: 2px;
+}
+
+
+/* ==========================================================================
+   04. NAVBAR
+   The same navbar markup is copied into all six pages. Only the
+   "active" class moves to the link of the current page.
+   ========================================================================== */
+.gtc-navbar {
+  background-color: var(--gtc-white);
+  border-bottom: 1px solid var(--gtc-line);
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+}
+
+.gtc-navbar .navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--gtc-forest);
+  letter-spacing: -0.02em;
+}
+
+.gtc-navbar .navbar-brand:hover {
+  text-decoration: none;
+  color: var(--gtc-green);
+}
+
+.gtc-logo {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+}
+
+.gtc-brand-text small {
+  display: block;
+  font-family: var(--gtc-font-mono);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gtc-muted);
+}
+
+.gtc-navbar .nav-link {
+  position: relative;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--gtc-ink);
+  padding: 0.5rem 0.9rem;
+}
+
+.gtc-navbar .nav-link:hover,
+.gtc-navbar .nav-link:focus {
+  color: var(--gtc-green);
+  text-decoration: none;
+}
+
+/* A green underline grows from the centre on hover and stays on the
+   current page. This is a pure CSS transition - no JavaScript needed. */
+.gtc-navbar .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0.15rem;
+  width: 0;
+  height: 2px;
+  background-color: var(--gtc-green);
+  transform: translateX(-50%);
+  transition: width 0.25s ease;
+}
+
+.gtc-navbar .nav-link:hover::after,
+.gtc-navbar .nav-link.active::after {
+  width: calc(100% - 1.8rem);
+}
+
+.gtc-navbar .nav-link.active {
+  color: var(--gtc-green);
+}
+
+.gtc-navbar .navbar-toggler {
+  border-color: var(--gtc-line);
+  padding: 0.35rem 0.55rem;
+}
+
+
+/* ==========================================================================
+   05. WELCOME BAR
+   Shown only when a visitor name has been saved in a cookie.
+   ========================================================================== */
+.gtc-welcome {
+  background-color: var(--gtc-pale);
+  border-bottom: 1px solid var(--gtc-line);
+  font-size: 0.9rem;
+  padding: 0.55rem 0;
+}
+
+.gtc-welcome__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.gtc-welcome__text {
+  margin: 0;
+  color: var(--gtc-forest);
+  font-weight: 600;
+}
+
+.gtc-welcome__btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gtc-green);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+
+/* ==========================================================================
+   06. BUTTONS
+   Three button styles only, so every page looks consistent.
+   ========================================================================== */
+.btn-gtc-primary,
+.btn-gtc-accent,
+.btn-gtc-outline {
+  border-radius: var(--gtc-radius-sm);
+  font-weight: 600;
+  padding: 0.65rem 1.5rem;
+  border: 2px solid transparent;
+  transition: transform 0.2s ease, background-color 0.2s ease,
+              color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-gtc-primary {
+  background-color: var(--gtc-green);
+  color: var(--gtc-white);
+}
+
+.btn-gtc-primary:hover,
+.btn-gtc-primary:focus {
+  background-color: var(--gtc-forest);
+  color: var(--gtc-white);
+  transform: translateY(-2px);
+  box-shadow: var(--gtc-shadow);
+}
+
+.btn-gtc-accent {
+  background-color: var(--gtc-solar);
+  color: var(--gtc-forest);
+}
+
+.btn-gtc-accent:hover,
+.btn-gtc-accent:focus {
+  background-color: #DB9800;
+  color: var(--gtc-forest);
+  transform: translateY(-2px);
+  box-shadow: var(--gtc-shadow);
+}
+
+.btn-gtc-outline {
+  background-color: transparent;
+  color: var(--gtc-green);
+  border-color: var(--gtc-green);
+}
+
+.btn-gtc-outline:hover,
+.btn-gtc-outline:focus {
+  background-color: var(--gtc-green);
+  color: var(--gtc-white);
+  transform: translateY(-2px);
+}
+
+/* On a dark background the outline button turns white. */
+.gtc-on-dark .btn-gtc-outline {
+  color: var(--gtc-white);
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+.gtc-on-dark .btn-gtc-outline:hover,
+.gtc-on-dark .btn-gtc-outline:focus {
+  background-color: var(--gtc-white);
+  color: var(--gtc-forest);
+  border-color: var(--gtc-white);
+}
+
+
+/* ==========================================================================
+   07. SECTION LAYOUT HELPERS
+   ========================================================================== */
+.gtc-section {
+  padding-top: var(--gtc-section-space);
+  padding-bottom: var(--gtc-section-space);
+}
+
+.gtc-section--pale {
+  background-color: var(--gtc-pale);
+}
+
+.gtc-section--offwhite {
+  background-color: var(--gtc-off-white);
+}
+
+.gtc-section--dark {
+  background-color: var(--gtc-forest);
+  color: var(--gtc-white);
+}
+
+.gtc-section--dark h1,
+.gtc-section--dark h2,
+.gtc-section--dark h3,
+.gtc-section--dark p {
+  color: var(--gtc-white);
+}
+
+/* The eyebrow is the small monospace label above a heading. The dot in
+   front of it echoes the circuit nodes in the club logo. */
+.gtc-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--gtc-font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gtc-green);
+  margin-bottom: 0.75rem;
+}
+
+.gtc-eyebrow::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--gtc-solar);
+  flex-shrink: 0;
+}
+
+.gtc-section--dark .gtc-eyebrow {
+  color: var(--gtc-leaf);
+}
+
+.gtc-section-intro {
+  max-width: 680px;
+  margin-bottom: 3rem;
+}
+
+.gtc-section-intro p {
+  color: var(--gtc-muted);
+  font-size: 1.05rem;
+}
+
+.gtc-section--dark .gtc-section-intro p {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+
+/* ==========================================================================
+   08. HERO SECTION
+   The background image sits under a dark green gradient so the white
+   headline always stays readable. If the image file is missing, the
+   gradient alone still looks correct - the page never breaks.
+   ========================================================================== */
+.gtc-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 78vh;
+  padding: 5rem 0 3rem;
+  background-color: var(--gtc-forest);
+  background-image:
+    linear-gradient(115deg, rgba(20, 83, 45, 0.94) 0%,
+                            rgba(20, 83, 45, 0.72) 55%,
+                            rgba(20, 83, 45, 0.45) 100%),
+    url("../images/hero-green-campus.jpg");
+  background-size: cover;
+  background-position: center;
+  color: var(--gtc-white);
+}
+
+.gtc-hero__content {
+  max-width: 660px;
+}
+
+.gtc-hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--gtc-font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gtc-solar);
+  margin-bottom: 1rem;
+}
+
+.gtc-hero h1 {
+  color: var(--gtc-white);
+  margin-bottom: 1.25rem;
+}
+
+.gtc-hero__lead {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 2rem;
+}
+
+.gtc-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+/* The three focus areas sit on a strip along the bottom of the hero. */
+.gtc-hero__strip {
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  margin-top: 3.5rem;
+  padding-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+}
+
+.gtc-hero__strip-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 600;
+}
+
+.gtc-hero__strip-item span {
+  font-family: var(--gtc-font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: var(--gtc-solar);
+}
+
+.gtc-hero__strip-item:hover {
+  color: var(--gtc-white);
+  text-decoration: none;
+}
+
+
+/* ==========================================================================
+   09. CARDS
+   One card style shared by every page.
+   ========================================================================== */
+.gtc-card {
+  position: relative;
+  height: 100%;
+  background-color: var(--gtc-white);
+  border: 1px solid var(--gtc-line);
+  border-radius: var(--gtc-radius);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.gtc-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--gtc-shadow-lg);
+}
+
+/* A green bar along the top edge widens when the card is hovered. */
+.gtc-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 4px;
+  background-color: var(--gtc-green);
+  transition: width 0.3s ease;
+  z-index: 2;
+}
+
+.gtc-card:hover::before {
+  width: 100%;
+}
+
+/* The media block uses a background image with a green gradient fallback,
+   so the layout still looks finished before the photos are added. */
+.gtc-card__media {
+  height: 190px;
+  background-color: var(--gtc-leaf);
+  background-image: linear-gradient(140deg, var(--gtc-green), var(--gtc-leaf));
+  background-size: cover;
+  background-position: center;
+}
+
+.gtc-card__body {
+  padding: 1.5rem;
+}
+
+.gtc-card__body h3 {
+  margin-bottom: 0.6rem;
+}
+
+.gtc-card__body p {
+  color: var(--gtc-muted);
+  font-size: 0.95rem;
+  margin-bottom: 1.1rem;
+}
+
+.gtc-card__link {
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.gtc-card__link i {
+  transition: transform 0.2s ease;
+}
+
+.gtc-card__link:hover {
+  text-decoration: none;
+}
+
+.gtc-card__link:hover i {
+  transform: translateX(4px);
+}
+
+/* A simpler card used for lists of short points. */
+.gtc-mini-card {
+  height: 100%;
+  background-color: var(--gtc-white);
+  border: 1px solid var(--gtc-line);
+  border-radius: var(--gtc-radius);
+  padding: 1.6rem;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.gtc-mini-card:hover {
+  border-color: var(--gtc-leaf);
+  transform: translateY(-4px);
+}
+
+.gtc-mini-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background-color: var(--gtc-pale);
+  color: var(--gtc-green);
+  font-size: 1.35rem;
+  margin-bottom: 1rem;
+}
+
+.gtc-mini-card h3 {
+  font-size: 1.08rem;
+  margin-bottom: 0.5rem;
+}
+
+.gtc-mini-card p {
+  color: var(--gtc-muted);
+  font-size: 0.93rem;
+  margin-bottom: 0;
+}
+
+
+/* ==========================================================================
+   10. EVENT HIGHLIGHT
+   ========================================================================== */
+.gtc-event {
+  background-color: var(--gtc-white);
+  border: 1px solid var(--gtc-line);
+  border-radius: var(--gtc-radius);
+  overflow: hidden;
+  box-shadow: var(--gtc-shadow);
+}
+
+.gtc-event__media {
+  min-height: 260px;
+  height: 100%;
+  background-color: var(--gtc-green);
+  background-image: linear-gradient(150deg, var(--gtc-forest), var(--gtc-leaf));
+  background-size: cover;
+  background-position: center;
+}
+
+.gtc-event__body {
+  padding: 2.25rem;
+}
+
+.gtc-event__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin: 1.25rem 0 1.5rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--gtc-line);
+  border-bottom: 1px solid var(--gtc-line);
+}
+
+.gtc-event__meta div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.92rem;
+  color: var(--gtc-muted);
+}
+
+.gtc-event__meta i {
+  color: var(--gtc-green);
+}
+
+.gtc-badge {
+  display: inline-block;
+  font-family: var(--gtc-font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.32rem 0.7rem;
+  border-radius: 999px;
+  background-color: var(--gtc-pale);
+  color: var(--gtc-green);
+}
+
+
+/* ==========================================================================
+   11. CALL TO ACTION BAND
+   ========================================================================== */
+.gtc-cta {
+  background-color: var(--gtc-forest);
+  background-image: linear-gradient(120deg, var(--gtc-forest), var(--gtc-green));
+  color: var(--gtc-white);
+  border-radius: var(--gtc-radius);
+  padding: 3rem 2.5rem;
+  text-align: center;
+}
+
+.gtc-cta h2 {
+  color: var(--gtc-white);
+  margin-bottom: 0.85rem;
+}
+
+.gtc-cta p {
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 560px;
+  margin: 0 auto 1.75rem;
+}
+
+
+/* ==========================================================================
+   12. FOOTER
+   ========================================================================== */
+.gtc-footer {
+  background-color: var(--gtc-forest);
+  color: rgba(255, 255, 255, 0.78);
+  padding-top: 3.5rem;
+}
+
+.gtc-footer h4 {
+  color: var(--gtc-white);
+  font-size: 0.78rem;
+  font-family: var(--gtc-font-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 1.1rem;
+}
+
+.gtc-footer p {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.92rem;
+}
+
+.gtc-footer a {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.92rem;
+}
+
+.gtc-footer a:hover {
+  color: var(--gtc-solar);
+  text-decoration: none;
+}
+
+.gtc-footer__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+  color: var(--gtc-white);
+  font-weight: 800;
+}
+
+.gtc-footer__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.gtc-footer__list li {
+  margin-bottom: 0.5rem;
+}
+
+.gtc-footer__social {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+
+.gtc-footer__social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: var(--gtc-white);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.gtc-footer__social a:hover {
+  background-color: var(--gtc-solar);
+  border-color: var(--gtc-solar);
+  color: var(--gtc-forest);
+}
+
+.gtc-footer__bottom {
+  margin-top: 3rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  font-size: 0.85rem;
+}
+
+.gtc-footer__bottom p {
+  margin-bottom: 0;
+  font-size: 0.85rem;
+}
+
+.gtc-footer__reset {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.78);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.gtc-footer__reset:hover {
+  color: var(--gtc-solar);
+}
+
+.gtc-disclaimer {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 0.75rem;
+}
+
+
+/* ==========================================================================
+   13. COOKIE BANNER
+   Fixed to the bottom of the screen on every page.
+   ========================================================================== */
+.gtc-cookie-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1080;
+  background-color: var(--gtc-forest);
+  color: var(--gtc-white);
+  padding: 1rem 0;
+  box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.2);
+  animation: gtcSlideUp 0.45s ease both;
+}
+
+.gtc-cookie-banner__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.gtc-cookie-banner__text {
+  margin: 0;
+  color: var(--gtc-white);
+  font-size: 0.92rem;
+  max-width: 640px;
+}
+
+.gtc-cookie-banner__text i {
+  color: var(--gtc-solar);
+  margin-right: 0.4rem;
+}
+
+.gtc-cookie-banner__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.gtc-cookie-banner__dismiss {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.88rem;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0.4rem 0.6rem;
+}
+
+.gtc-cookie-banner__dismiss:hover {
+  color: var(--gtc-white);
+}
+
+
+/* ==========================================================================
+   14. ANIMATIONS
+   Pure CSS only - no animation libraries are used anywhere on this site.
+   ========================================================================== */
+@keyframes gtcFadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gtcSlideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+.gtc-animate-1 { animation: gtcFadeUp 0.7s ease 0.05s both; }
+.gtc-animate-2 { animation: gtcFadeUp 0.7s ease 0.20s both; }
+.gtc-animate-3 { animation: gtcFadeUp 0.7s ease 0.35s both; }
+
+/* Visitors who ask their system to reduce motion get no animation at all. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+
+/* ==========================================================================
+   15. RESPONSIVE RULES
+   Bootstrap already handles the grid. These media queries fine-tune the
+   custom components for tablet and phone screens.
+   ========================================================================== */
+
+/* Tablet and below */
+@media (max-width: 991.98px) {
+  :root {
+    --gtc-section-space: 3.5rem;
+  }
+
+  .gtc-navbar .navbar-nav {
+    padding-top: 0.75rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .gtc-navbar .nav-link {
+    padding: 0.6rem 0;
+  }
+
+  /* The underline effect is not useful in the stacked mobile menu. */
+  .gtc-navbar .nav-link::after {
+    display: none;
+  }
+
+  .gtc-navbar .btn-gtc-accent {
+    display: block;
+    margin-top: 0.75rem;
+    text-align: center;
+  }
+
+  .gtc-hero {
+    min-height: auto;
+    padding: 3.5rem 0 2.5rem;
+  }
+
+  .gtc-event__body {
+    padding: 1.75rem;
+  }
+}
+
+/* Phone */
+@media (max-width: 575.98px) {
+  .gtc-hero__strip {
+    gap: 0.9rem;
+    margin-top: 2.5rem;
+    flex-direction: column;
+  }
+
+  .gtc-hero__actions .btn-gtc-primary,
+  .gtc-hero__actions .btn-gtc-outline {
+    width: 100%;
+    text-align: center;
+  }
+
+  .gtc-cta {
+    padding: 2.25rem 1.35rem;
+  }
+
+  .gtc-cookie-banner__inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .gtc-cookie-banner__actions {
+    width: 100%;
+  }
+
+  .gtc-cookie-banner__actions .btn-gtc-accent {
+    flex-grow: 1;
+  }
+}
+
+
+/* ==========================================================================
+   16. RESERVED SPACE FOR OTHER MEMBERS
+   Member 2 (renewable.html, ev.html) and Member 3 (smart-city.html,
+   events.html) add their page-specific styles below this line so the
+   shared styles above stay untouched.
+   ========================================================================== */
+
+/* --- MEMBER 2 STYLES START HERE --- */
+
+/* Calculator panel (renewable.html and ev.html) ---------------------------- */
+.gtc-calc {
+  background-color: var(--gtc-white);
+  border: 1px solid var(--gtc-line);
+  border-radius: var(--gtc-radius);
+  padding: 2rem;
+  box-shadow: var(--gtc-shadow);
+}
+
+.gtc-calc label {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--gtc-forest);
+  margin-bottom: 0.35rem;
+}
+
+.gtc-calc .form-control {
+  border-color: var(--gtc-line);
+  border-radius: var(--gtc-radius-sm);
+  padding: 0.6rem 0.85rem;
+}
+
+.gtc-calc .form-control:focus {
+  border-color: var(--gtc-leaf);
+  box-shadow: 0 0 0 0.2rem rgba(102, 187, 106, 0.25);
+}
+
+.gtc-calc .form-text {
+  font-size: 0.82rem;
+  color: var(--gtc-muted);
+}
+
+/* Result panel ------------------------------------------------------------- */
+.gtc-result {
+  background-color: var(--gtc-pale);
+  border-radius: var(--gtc-radius);
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.gtc-result h3 {
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+}
+
+.gtc-result-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.gtc-result-item {
+  flex: 1 1 140px;
+  background-color: var(--gtc-white);
+  border-radius: var(--gtc-radius-sm);
+  padding: 1rem;
+}
+
+.gtc-result-item span {
+  display: block;
+  font-family: var(--gtc-font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gtc-muted);
+  margin-bottom: 0.3rem;
+}
+
+.gtc-result-item strong {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--gtc-forest);
+  line-height: 1.2;
+}
+
+.gtc-result-item--highlight {
+  background-color: var(--gtc-forest);
+}
+
+.gtc-result-item--highlight span {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.gtc-result-item--highlight strong {
+  color: var(--gtc-solar);
+}
+
+/* Assumption note ---------------------------------------------------------- */
+.gtc-note {
+  font-size: 0.83rem;
+  color: var(--gtc-muted);
+  background-color: var(--gtc-off-white);
+  border-left: 3px solid var(--gtc-leaf);
+  border-radius: 0 var(--gtc-radius-sm) var(--gtc-radius-sm) 0;
+  padding: 0.85rem 1rem;
+  margin-top: 1.25rem;
+}
+
+.gtc-note strong {
+  color: var(--gtc-forest);
+}
+
+/* Saved list (localStorage output) ----------------------------------------- */
+.gtc-saved {
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--gtc-line);
+}
+
+.gtc-saved__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.gtc-saved__head h3 {
+  font-size: 1.02rem;
+  margin: 0;
+}
+
+.gtc-saved-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.gtc-saved-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background-color: var(--gtc-off-white);
+  border: 1px solid var(--gtc-line);
+  border-radius: var(--gtc-radius-sm);
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.6rem;
+  font-size: 0.92rem;
+}
+
+.gtc-saved-item__main {
+  min-width: 0;
+}
+
+.gtc-saved-item__main strong {
+  display: block;
+  color: var(--gtc-forest);
+}
+
+.gtc-saved-item__main small {
+  color: var(--gtc-muted);
+}
+
+.gtc-remove-btn {
+  flex-shrink: 0;
+  background: none;
+  border: 1px solid var(--gtc-line);
+  border-radius: var(--gtc-radius-sm);
+  color: var(--gtc-muted);
+  padding: 0.3rem 0.6rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease,
+              border-color 0.2s ease;
+}
+
+.gtc-remove-btn:hover {
+  background-color: #C62828;
+  border-color: #C62828;
+  color: var(--gtc-white);
+}
+
+.gtc-empty {
+  color: var(--gtc-muted);
+  font-size: 0.92rem;
+  font-style: italic;
+  margin: 0;
+}
+
+/* Numbered process steps (ev.html - How EVs work) -------------------------- */
+.gtc-step {
+  display: flex;
+  gap: 1.1rem;
+  padding-bottom: 1.75rem;
+}
+
+.gtc-step__num {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: var(--gtc-pale);
+  color: var(--gtc-green);
+  font-family: var(--gtc-font-mono);
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gtc-step__body h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.35rem;
+}
+
+.gtc-step__body p {
+  color: var(--gtc-muted);
+  font-size: 0.95rem;
+  margin-bottom: 0;
+}
+
+/* Icon list (benefits and challenges) -------------------------------------- */
+.gtc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.gtc-list li {
+  display: flex;
+  gap: 0.7rem;
+  padding: 0.55rem 0;
+  font-size: 0.95rem;
+  color: var(--gtc-ink);
+}
+
+.gtc-list i {
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+  color: var(--gtc-green);
+}
+
+.gtc-list--warn i {
+  color: #E08600;
+}
+
+/* Comparison table --------------------------------------------------------- */
+.gtc-table {
+  border: 1px solid var(--gtc-line);
+  border-radius: var(--gtc-radius);
+  overflow: hidden;
+}
+
+.gtc-table table {
+  margin-bottom: 0;
+}
+
+.gtc-table thead th {
+  background-color: var(--gtc-forest);
+  color: var(--gtc-white);
+  font-size: 0.82rem;
+  font-family: var(--gtc-font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 0.9rem 1rem;
+  border: none;
+  white-space: nowrap;
+}
+
+.gtc-table tbody th {
+  font-weight: 600;
+  color: var(--gtc-forest);
+  background-color: var(--gtc-off-white);
+}
+
+.gtc-table tbody td,
+.gtc-table tbody th {
+  padding: 0.85rem 1rem;
+  vertical-align: top;
+  font-size: 0.93rem;
+  border-color: var(--gtc-line);
+}
+
+/* Small green tag used on cards -------------------------------------------- */
+.gtc-tag {
+  display: inline-block;
+  font-family: var(--gtc-font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gtc-green);
+  background-color: var(--gtc-pale);
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem;
+  margin-bottom: 0.6rem;
+}
+
+@media (max-width: 575.98px) {
+  .gtc-calc {
+    padding: 1.35rem;
+  }
+
+  .gtc-result-item strong {
+    font-size: 1.15rem;
+  }
+}
+
+
+
+/* --- MEMBER 3 STYLES START HERE --- */

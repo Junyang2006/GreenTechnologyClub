@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="What electric vehicles are, the four main types, how they work, charging, environmental impact, and a running cost calculator.">
+  <title>Electric Vehicles | Green Technology Club</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons (CSS only, no JavaScript) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Our own stylesheet, loaded last so it can override Bootstrap -->
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<a class="gtc-skip-link" href="#main-content">Skip to main content</a>
+
+
+<!-- ==========================================================================
+     NAVBAR  (identical on all six pages - only the "active" class moves)
+     ========================================================================== -->
+<nav class="navbar navbar-expand-lg gtc-navbar sticky-top" aria-label="Main navigation">
+  <div class="container">
+
+    <a class="navbar-brand" href="index.html">
+      <svg class="gtc-logo" viewBox="0 0 40 40" role="img" aria-label="Green Technology Club logo">
+        <path d="M20 35C8 29 6 14 20 5C34 14 32 29 20 35Z" fill="#E9F3EA" stroke="#2E7D32" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M20 34V9M20 24L12.5 19M20 17.5L27.5 12.5M20 29L26.5 24.5" stroke="#2E7D32" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="12.5" cy="19" r="2.2" fill="#F2A900"/>
+        <circle cx="27.5" cy="12.5" r="2.2" fill="#F2A900"/>
+        <circle cx="26.5" cy="24.5" r="2.2" fill="#F2A900"/>
+      </svg>
+      <span class="gtc-brand-text">
+        Green Technology Club
+        <small>Student Initiative</small>
+      </span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#gtcNavMenu" aria-controls="gtcNavMenu"
+            aria-expanded="false" aria-label="Toggle navigation menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="gtcNavMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="renewable.html">Renewable Energy</a></li>
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="ev.html">Electric Vehicles</a></li>
+        <li class="nav-item"><a class="nav-link" href="smart-city.html">Smart Cities</a></li>
+        <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
+        <li class="nav-item ms-lg-3">
+          <a class="btn btn-gtc-accent" href="events.html#register">Join Us</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+<!-- ==========================================================================
+     WELCOME BAR  (only appears when a name is stored in a cookie)
+     ========================================================================== -->
+<div class="gtc-welcome" id="gtcWelcome" hidden>
+  <div class="container">
+    <div class="gtc-welcome__inner">
+      <p class="gtc-welcome__text" id="gtcWelcomeText"></p>
+      <button type="button" class="gtc-welcome__btn" id="gtcForgetBtn">Not you?</button>
+    </div>
+  </div>
+</div>
+
+
+<main id="main-content">
+
+  <!-- ========================================================================
+       PAGE HEADER
+       ======================================================================== -->
+  <header class="gtc-section gtc-section--dark">
+    <div class="container">
+      <div class="gtc-section-intro mb-0">
+        <p class="gtc-eyebrow gtc-animate-1">Electric vehicles</p>
+        <h1 class="gtc-animate-1">Fewer moving parts, a completely different fuel bill</h1>
+        <p class="gtc-animate-2 mt-3 mb-0">
+          An electric car replaces roughly two thousand moving engine parts
+          with about twenty. That single change affects how it drives, what it
+          costs to run, what can go wrong with it, and how clean it really is.
+          This page works through each of those.
+        </p>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ========================================================================
+       WHAT IS AN EV
+       ======================================================================== -->
+  <section class="gtc-section">
+    <div class="container">
+      <div class="row g-5">
+
+        <div class="col-lg-7">
+          <p class="gtc-eyebrow">The basics</p>
+          <h2>What is an electric vehicle?</h2>
+          <p class="mt-3">
+            An electric vehicle is any vehicle driven by one or more electric
+            motors instead of, or alongside, a petrol or diesel engine. The
+            energy comes from a rechargeable battery pack rather than a fuel
+            tank.
+          </p>
+          <p>
+            The important difference is not just the fuel. A petrol engine
+            converts only around a quarter of the energy in its fuel into
+            movement; the rest leaves as heat and noise. An electric motor
+            converts the large majority of the electricity it receives into
+            movement. That efficiency gap is the reason an EV costs so much
+            less per kilometre even where electricity is not cheap.
+          </p>
+          <p class="mb-0">
+            EVs are also mechanically simpler. There is no gearbox in most
+            models, no exhaust system, no oil to change and no clutch to wear
+            out, which reduces routine servicing considerably.
+          </p>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="gtc-mini-card h-100">
+            <span class="gtc-mini-card__icon"><i class="bi bi-lightning-charge"></i></span>
+            <h3>One number worth remembering</h3>
+            <p>
+              Energy use in an EV is measured in kilowatt-hours per 100 km,
+              the same way a petrol car is measured in litres per 100 km. A
+              typical compact EV uses somewhere around 15 to 18 kWh per
+              100 km.
+            </p>
+            <p class="mb-0">
+              Once you know that figure and your electricity tariff, working
+              out the running cost is straightforward &mdash; which is exactly
+              what the calculator further down this page does.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       TYPES OF EV  (cards + localStorage shortlist)
+       ======================================================================== -->
+  <section class="gtc-section gtc-section--offwhite">
+    <div class="container">
+
+      <div class="gtc-section-intro">
+        <p class="gtc-eyebrow">Types</p>
+        <h2>Four types of electric vehicle</h2>
+        <p>
+          "EV" is often used as if it meant one thing. In practice there are
+          four categories, and they differ in how much of the driving is
+          actually electric. Save the ones you want to read about later.
+        </p>
+      </div>
+
+      <div class="row g-4">
+
+        <div class="col-md-6 col-lg-3">
+          <div class="gtc-mini-card h-100 d-flex flex-column">
+            <span class="gtc-mini-card__icon"><i class="bi bi-battery-full"></i></span>
+            <span class="gtc-tag">BEV</span>
+            <h3>Battery Electric</h3>
+            <p class="flex-grow-1">
+              Runs on battery power only. No engine, no petrol, no exhaust.
+              Must be plugged in to recharge. This is what most people mean by
+              "an EV".
+            </p>
+            <button type="button" class="btn btn-gtc-outline btn-sm gtc-shortlist-btn"
+                    data-ev="Battery Electric (BEV)">
+              Save to shortlist
+            </button>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="gtc-mini-card h-100 d-flex flex-column">
+            <span class="gtc-mini-card__icon"><i class="bi bi-arrow-repeat"></i></span>
+            <span class="gtc-tag">HEV</span>
+            <h3>Hybrid Electric</h3>
+            <p class="flex-grow-1">
+              A petrol engine works with a small battery and motor. The
+              battery is charged by the engine and by braking, never from a
+              plug. Fuel use drops, but it still runs on petrol.
+            </p>
+            <button type="button" class="btn btn-gtc-outline btn-sm gtc-shortlist-btn"
+                    data-ev="Hybrid Electric (HEV)">
+              Save to shortlist
+            </button>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="gtc-mini-card h-100 d-flex flex-column">
+            <span class="gtc-mini-card__icon"><i class="bi bi-plug"></i></span>
+            <span class="gtc-tag">PHEV</span>
+            <h3>Plug-in Hybrid</h3>
+            <p class="flex-grow-1">
+              A larger battery that can be charged from a plug, plus a petrol
+              engine for longer trips. Short daily journeys can be fully
+              electric while long drives remain possible.
+            </p>
+            <button type="button" class="btn btn-gtc-outline btn-sm gtc-shortlist-btn"
+                    data-ev="Plug-in Hybrid (PHEV)">
+              Save to shortlist
+            </button>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="gtc-mini-card h-100 d-flex flex-column">
+            <span class="gtc-mini-card__icon"><i class="bi bi-droplet"></i></span>
+            <span class="gtc-tag">FCEV</span>
+            <h3>Fuel Cell Electric</h3>
+            <p class="flex-grow-1">
+              Carries hydrogen and generates its own electricity on board. The
+              only tailpipe output is water. Refuelling is fast, but hydrogen
+              stations are still very rare.
+            </p>
+            <button type="button" class="btn btn-gtc-outline btn-sm gtc-shortlist-btn"
+                    data-ev="Fuel Cell Electric (FCEV)">
+              Save to shortlist
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Shortlist output - localStorage -->
+      <div class="row justify-content-center mt-5">
+        <div class="col-lg-8">
+          <div class="gtc-calc">
+            <div class="gtc-saved__head">
+              <h3>My shortlist</h3>
+              <button type="button" class="btn btn-gtc-outline btn-sm"
+                      id="evShortlistClearBtn">Clear all</button>
+            </div>
+
+            <p class="gtc-empty" id="evShortlistMsg" style="display: none;"></p>
+
+            <ul class="gtc-saved-list" id="evShortlist"></ul>
+
+            <p class="gtc-note mb-0">
+              <strong>How this works:</strong> your shortlist is saved in this
+              browser using <strong>localStorage</strong>. It stays here after
+              you close the browser, and it is never sent to a server.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       HOW EVS WORK  (numbered because it really is a sequence)
+       ======================================================================== -->
+  <section class="gtc-section">
+    <div class="container">
+      <div class="row g-5">
+
+        <div class="col-lg-5">
+          <p class="gtc-eyebrow">Under the floor</p>
+          <h2>How an EV works</h2>
+          <p class="mt-3 mb-0">
+            The steps below follow the energy from the wall socket to the
+            wheels. Each stage loses a little energy as heat, but far less
+            than a combustion engine loses.
+          </p>
+        </div>
+
+        <div class="col-lg-7">
+
+          <div class="gtc-step">
+            <div class="gtc-step__num">01</div>
+            <div class="gtc-step__body">
+              <h3>Charging</h3>
+              <p>
+                Electricity from the grid flows into the car. An on-board
+                charger converts alternating current from the socket into the
+                direct current the battery needs. Rapid chargers do this
+                conversion outside the car, which is why they are faster.
+              </p>
+            </div>
+          </div>
+
+          <div class="gtc-step">
+            <div class="gtc-step__num">02</div>
+            <div class="gtc-step__body">
+              <h3>Storage</h3>
+              <p>
+                The battery pack sits low in the floor and holds the energy
+                as chemical potential. Its position also lowers the car's
+                centre of gravity, which improves stability in corners.
+              </p>
+            </div>
+          </div>
+
+          <div class="gtc-step">
+            <div class="gtc-step__num">03</div>
+            <div class="gtc-step__body">
+              <h3>Conversion</h3>
+              <p>
+                When the accelerator is pressed, an inverter converts the
+                battery's direct current back into alternating current and
+                controls exactly how much reaches the motor. This is what
+                gives an EV such smooth, immediate response.
+              </p>
+            </div>
+          </div>
+
+          <div class="gtc-step">
+            <div class="gtc-step__num">04</div>
+            <div class="gtc-step__body">
+              <h3>Drive and recovery</h3>
+              <p>
+                The motor turns the wheels directly, with no gear changes in
+                most models. When slowing down, the motor runs in reverse as a
+                generator and sends energy back into the battery. This is
+                regenerative braking, and it is why EVs are most efficient in
+                stop-start city traffic rather than on highways.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       BENEFITS
+       ======================================================================== -->
+  <section class="gtc-section gtc-section--pale">
+    <div class="container">
+
+      <div class="gtc-section-intro">
+        <p class="gtc-eyebrow">Benefits</p>
+        <h2>What EVs are genuinely good at</h2>
+      </div>
+
+      <div class="row g-4">
+
+        <div class="col-md-6 col-lg-3">
+          <div class="gtc-mini-card">
+            <span class="gtc-mini-card__icon"><i class="bi bi-wind"></i></span>
+            <h3>No tailpipe emissions</h3>
+            <p>Nothing is emitted where the car is driven, which matters most in dense urban areas.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="gtc-mini-card">
+            <span class="gtc-mini-card__icon"><i class="bi bi-cash-coin"></i></span>
+            <h3>Lower running cost</h3>
+            <p>Electricity per kilometre is usually far cheaper than petrol, and servicing is simpler.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="gtc-mini-card">
+            <span class="gtc-mini-card__icon"><i class="bi bi-volume-down"></i></span>
+            <h3>Much quieter</h3>
+            <p>Removing engine noise reduces one of the largest sources of noise pollution in cities.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="gtc-mini-card">
+            <span class="gtc-mini-card__icon"><i class="bi bi-sun"></i></span>
+            <h3>Gets cleaner over time</h3>
+            <p>As the grid adds renewables, every EV already on the road becomes cleaner without modification.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       CHARGING
+       ======================================================================== -->
+  <section class="gtc-section">
+    <div class="container">
+
+      <div class="gtc-section-intro">
+        <p class="gtc-eyebrow">Charging</p>
+        <h2>Three levels of charging</h2>
+        <p>
+          Charging speed depends on how much power the charger can deliver.
+          Faster is not always better: slow charging overnight is gentler on
+          battery life and usually cheaper.
+        </p>
+      </div>
+
+      <div class="gtc-table table-responsive">
+        <table class="table table-hover mb-0">
+          <thead>
+            <tr>
+              <th scope="col">Level</th>
+              <th scope="col">Typical power</th>
+              <th scope="col">Where it is found</th>
+              <th scope="col">Best used for</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Level 1 &mdash; standard socket</th>
+              <td>About 2 kW</td>
+              <td>An ordinary household power point</td>
+              <td>Emergency top-ups only. Filling a large battery this way takes more than a day.</td>
+            </tr>
+            <tr>
+              <th scope="row">Level 2 &mdash; wall box</th>
+              <td>About 7 to 22 kW</td>
+              <td>Home installations, offices, shopping centre car parks</td>
+              <td>Everyday charging. Comfortably refills a car overnight or during a work day.</td>
+            </tr>
+            <tr>
+              <th scope="row">Level 3 &mdash; DC fast charging</th>
+              <td>50 kW and above</td>
+              <td>Highway rest stops and dedicated charging hubs</td>
+              <td>Long journeys. Adds a useful range in roughly the length of a coffee break.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       ENVIRONMENTAL IMPACT
+       ======================================================================== -->
+  <section class="gtc-section gtc-section--dark">
+    <div class="container">
+      <div class="row g-5">
+
+        <div class="col-lg-5">
+          <p class="gtc-eyebrow">The honest part</p>
+          <h2>Environmental impact</h2>
+          <p class="mt-3 mb-0">
+            EVs are cleaner overall, but the claim that they are "zero
+            emission" is not accurate. Being able to explain why is more
+            useful than repeating the slogan.
+          </p>
+        </div>
+
+        <div class="col-lg-7">
+          <div class="row g-4">
+
+            <div class="col-sm-6">
+              <h3 class="h6">Manufacturing costs more carbon</h3>
+              <p>
+                Producing a battery pack is energy intensive, so an EV starts
+                its life with a larger carbon debt than an equivalent petrol
+                car.
+              </p>
+            </div>
+
+            <div class="col-sm-6">
+              <h3 class="h6">Driving pays that debt back</h3>
+              <p>
+                Because it emits nothing while driving, the EV catches up over
+                its lifetime and then moves clearly ahead. How quickly depends
+                on how clean the local grid is.
+              </p>
+            </div>
+
+            <div class="col-sm-6">
+              <h3 class="h6">The grid matters</h3>
+              <p>
+                An EV charged from coal-heavy electricity is much less clean
+                than one charged from solar. This is why renewable energy and
+                electric transport have to advance together.
+              </p>
+            </div>
+
+            <div class="col-sm-6">
+              <h3 class="h6">Batteries need a second life</h3>
+              <p>
+                Mining lithium, nickel and cobalt has real environmental and
+                social costs. Recycling and reusing old packs for grid storage
+                is an active area of development.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       EV VS TRADITIONAL VEHICLE  (responsive table)
+       ======================================================================== -->
+  <section class="gtc-section">
+    <div class="container">
+
+      <div class="gtc-section-intro">
+        <p class="gtc-eyebrow">Side by side</p>
+        <h2>EV compared with a petrol vehicle</h2>
+        <p>
+          Neither column is entirely better. Which one suits a driver depends
+          mostly on where they park and how far they usually drive.
+        </p>
+      </div>
+
+      <div class="gtc-table table-responsive">
+        <table class="table table-hover mb-0">
+          <thead>
+            <tr>
+              <th scope="col">Aspect</th>
+              <th scope="col">Electric vehicle</th>
+              <th scope="col">Petrol vehicle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Energy source</th>
+              <td>Electricity from the grid or from solar</td>
+              <td>Refined petroleum fuel</td>
+            </tr>
+            <tr>
+              <th scope="row">Tailpipe emissions</th>
+              <td>None</td>
+              <td>Carbon dioxide, nitrogen oxides and particulates</td>
+            </tr>
+            <tr>
+              <th scope="row">Energy efficiency</th>
+              <td>Most of the input energy reaches the wheels</td>
+              <td>Roughly a quarter reaches the wheels; the rest is lost as heat</td>
+            </tr>
+            <tr>
+              <th scope="row">Running cost</th>
+              <td>Lower per kilometre in most conditions</td>
+              <td>Higher and tied to fuel price movements</td>
+            </tr>
+            <tr>
+              <th scope="row">Maintenance</th>
+              <td>No oil changes, no exhaust, fewer wearing parts</td>
+              <td>Regular servicing of engine, oil, filters and exhaust</td>
+            </tr>
+            <tr>
+              <th scope="row">Refuelling time</th>
+              <td>Minutes at a fast charger, hours at home</td>
+              <td>A few minutes anywhere</td>
+            </tr>
+            <tr>
+              <th scope="row">Infrastructure</th>
+              <td>Charging network still expanding</td>
+              <td>Petrol stations everywhere</td>
+            </tr>
+            <tr>
+              <th scope="row">Purchase price</th>
+              <td>Usually higher at present</td>
+              <td>Usually lower at present</td>
+            </tr>
+            <tr>
+              <th scope="row">Noise</th>
+              <td>Nearly silent at low speed</td>
+              <td>Audible engine and exhaust noise</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       RUNNING COST CALCULATOR
+       parseInt / parseFloat / isNaN / isFinite + jQuery
+       ======================================================================== -->
+  <section class="gtc-section gtc-section--offwhite">
+    <div class="container">
+
+      <div class="gtc-section-intro">
+        <p class="gtc-eyebrow">Try the numbers</p>
+        <h2>Running cost calculator</h2>
+        <p>
+          Enter how far you drive in a month and the prices you actually pay.
+          The calculator compares the monthly fuel cost of a petrol car with
+          the monthly charging cost of an equivalent electric car.
+        </p>
+      </div>
+
+      <div class="row g-4">
+
+        <div class="col-lg-7">
+          <div class="gtc-calc">
+
+            <form id="evForm" novalidate>
+              <div class="row g-3">
+
+                <div class="col-sm-4">
+                  <label for="evDistance" class="form-label">
+                    Distance per month (km)
+                  </label>
+                  <input type="number" class="form-control" id="evDistance"
+                         min="1" step="1" placeholder="e.g. 1200">
+                </div>
+
+                <div class="col-sm-4">
+                  <label for="evPetrolPrice" class="form-label">
+                    Petrol price (RM / litre)
+                  </label>
+                  <input type="number" class="form-control" id="evPetrolPrice"
+                         min="0.01" step="0.01" value="2.05">
+                  <div class="form-text">Change to today's price.</div>
+                </div>
+
+                <div class="col-sm-4">
+                  <label for="evElectricPrice" class="form-label">
+                    Electricity (RM / kWh)
+                  </label>
+                  <input type="number" class="form-control" id="evElectricPrice"
+                         min="0.01" step="0.01" value="0.50">
+                  <div class="form-text">Check a recent bill.</div>
+                </div>
+
+                <div class="col-12">
+                  <button type="submit" class="btn btn-gtc-primary">
+                    Compare costs
+                  </button>
+                </div>
+
+              </div>
+            </form>
+
+            <!-- Inline error message, shown by jQuery when input is invalid -->
+            <p class="gtc-note mb-0 mt-3" id="evError" style="display: none;"></p>
+
+            <!-- Results appear here after a successful calculation -->
+            <div class="gtc-result" id="evResult" style="display: none;">
+              <h3>Monthly comparison</h3>
+              <div class="gtc-result-grid">
+                <div class="gtc-result-item">
+                  <span>Petrol car</span>
+                  <strong id="evPetrolCost">&mdash;</strong>
+                </div>
+                <div class="gtc-result-item">
+                  <span>Electric car</span>
+                  <strong id="evElectricCost">&mdash;</strong>
+                </div>
+                <div class="gtc-result-item">
+                  <span>Difference / month</span>
+                  <strong id="evMonthlyDiff">&mdash;</strong>
+                </div>
+                <div class="gtc-result-item gtc-result-item--highlight">
+                  <span>Difference / year</span>
+                  <strong id="evYearlyDiff">&mdash;</strong>
+                </div>
+              </div>
+            </div>
+
+            <p class="gtc-note">
+              <strong>Assumptions used:</strong> the petrol car uses 8 litres
+              per 100 km and the electric car uses 16 kWh per 100 km. These
+              are typical figures for compact cars, chosen so the two are
+              comparable. Only fuel and charging are compared &mdash; purchase
+              price, insurance, road tax and servicing are not included.
+            </p>
+
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="gtc-mini-card h-100">
+            <span class="gtc-mini-card__icon"><i class="bi bi-calculator"></i></span>
+            <h3>Reading the result carefully</h3>
+            <p>
+              A large monthly difference does not automatically mean an EV is
+              the cheaper choice. EVs usually cost more to buy, so the fuel
+              saving has to run for several years before the total cost of
+              ownership turns in their favour.
+            </p>
+            <p class="mb-0">
+              The calculation is also sensitive to where you charge. Public
+              fast charging can cost several times more per kWh than charging
+              at home overnight, which changes the picture significantly.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       CALL TO ACTION
+       ======================================================================== -->
+  <section class="gtc-section gtc-on-dark">
+    <div class="container">
+      <div class="gtc-cta">
+        <h2>See an EV in person</h2>
+        <p>
+          Our Electric Vehicle Exhibition brings owners and their cars onto
+          campus so you can ask the questions a specification sheet cannot
+          answer.
+        </p>
+        <a class="btn btn-gtc-accent" href="events.html">See upcoming events</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+<!-- ==========================================================================
+     FOOTER  (identical on all six pages)
+     ========================================================================== -->
+<footer class="gtc-footer">
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-lg-4">
+        <div class="gtc-footer__brand">
+          <svg class="gtc-logo" viewBox="0 0 40 40" aria-hidden="true">
+            <path d="M20 35C8 29 6 14 20 5C34 14 32 29 20 35Z" fill="none" stroke="#66BB6A" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M20 34V9M20 24L12.5 19M20 17.5L27.5 12.5" stroke="#66BB6A" stroke-width="1.6" stroke-linecap="round"/>
+            <circle cx="12.5" cy="19" r="2.2" fill="#F2A900"/>
+            <circle cx="27.5" cy="12.5" r="2.2" fill="#F2A900"/>
+          </svg>
+          Green Technology Club
+        </div>
+        <p>
+          A proposed student club promoting renewable energy, electric
+          vehicles, smart cities and sustainable technology on campus.
+        </p>
+      </div>
+
+      <div class="col-6 col-lg-2">
+        <h4>Explore</h4>
+        <ul class="gtc-footer__list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="events.html">Events</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-lg-3">
+        <h4>Topics</h4>
+        <ul class="gtc-footer__list">
+          <li><a href="renewable.html">Renewable Energy</a></li>
+          <li><a href="ev.html">Electric Vehicles</a></li>
+          <li><a href="smart-city.html">Smart Cities</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-3">
+        <h4>Follow us</h4>
+        <p class="mb-0">Club social media accounts are being set up.</p>
+        <div class="gtc-footer__social">
+          <a href="events.html#follow" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="events.html#follow" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="events.html#follow" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="gtc-footer__bottom">
+      <div class="d-flex flex-wrap justify-content-between gap-2">
+        <p>&copy; <span id="footerYear">2026</span> Green Technology Club.</p>
+        <button type="button" class="gtc-footer__reset" id="cookieResetBtn">
+          Reset cookie preferences
+        </button>
+      </div>
+      <p class="gtc-disclaimer">
+        This website was created as a student coursework project. The club
+        described here is a proposal and is not an officially registered
+        organisation.
+      </p>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ==========================================================================
+     COOKIE NOTICE  (identical on all six pages, hidden until needed)
+     ========================================================================== -->
+<div class="gtc-cookie-banner" id="cookieBanner" role="region" aria-label="Cookie notice" hidden>
+  <div class="container">
+    <div class="gtc-cookie-banner__inner">
+      <p class="gtc-cookie-banner__text">
+        <i class="bi bi-shield-check"></i>
+        This website uses cookies to improve your browsing experience and to
+        remember your preferences on your next visit.
+      </p>
+      <div class="gtc-cookie-banner__actions">
+        <button type="button" class="btn btn-gtc-accent" id="cookieAcceptBtn">Accept</button>
+        <button type="button" class="gtc-cookie-banner__dismiss" id="cookieDismissBtn">Not now</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Scripts: jQuery first, then Bootstrap, then our own file -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/script.js"></script>
+
+</body>
+</html>

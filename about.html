@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The mission, vision, objectives and activities of the Green Technology Club, a proposed student club for sustainable technology.">
+  <title>About Us | Green Technology Club</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons (CSS only, no JavaScript) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Our own stylesheet, loaded last so it can override Bootstrap -->
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<a class="gtc-skip-link" href="#main-content">Skip to main content</a>
+
+
+<!-- ==========================================================================
+     NAVBAR  (identical on all six pages - only the "active" class moves)
+     ========================================================================== -->
+<nav class="navbar navbar-expand-lg gtc-navbar sticky-top" aria-label="Main navigation">
+  <div class="container">
+
+    <a class="navbar-brand" href="index.html">
+      <svg class="gtc-logo" viewBox="0 0 40 40" role="img" aria-label="Green Technology Club logo">
+        <path d="M20 35C8 29 6 14 20 5C34 14 32 29 20 35Z" fill="#E9F3EA" stroke="#2E7D32" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M20 34V9M20 24L12.5 19M20 17.5L27.5 12.5M20 29L26.5 24.5" stroke="#2E7D32" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="12.5" cy="19" r="2.2" fill="#F2A900"/>
+        <circle cx="27.5" cy="12.5" r="2.2" fill="#F2A900"/>
+        <circle cx="26.5" cy="24.5" r="2.2" fill="#F2A900"/>
+      </svg>
+      <span class="gtc-brand-text">
+        Green Technology Club
+        <small>Student Initiative</small>
+      </span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#gtcNavMenu" aria-controls="gtcNavMenu"
+            aria-expanded="false" aria-label="Toggle navigation menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="gtcNavMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="about.html">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="renewable.html">Renewable Energy</a></li>
+        <li class="nav-item"><a class="nav-link" href="ev.html">Electric Vehicles</a></li>
+        <li class="nav-item"><a class="nav-link" href="smart-city.html">Smart Cities</a></li>
+        <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
+        <li class="nav-item ms-lg-3">
+          <a class="btn btn-gtc-accent" href="events.html#register">Join Us</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+<!-- ==========================================================================
+     WELCOME BAR  (only appears when a name is stored in a cookie)
+     ========================================================================== -->
+<div class="gtc-welcome" id="gtcWelcome" hidden>
+  <div class="container">
+    <div class="gtc-welcome__inner">
+      <p class="gtc-welcome__text" id="gtcWelcomeText"></p>
+      <button type="button" class="gtc-welcome__btn" id="gtcForgetBtn">Not you?</button>
+    </div>
+  </div>
+</div>
+
+
+<main id="main-content">
+
+  <!-- ========================================================================
+       PAGE HEADER
+       ======================================================================== -->
+  <header class="gtc-section gtc-section--dark">
+    <div class="container">
+      <div class="gtc-section-intro mb-0">
+        <p class="gtc-eyebrow gtc-animate-1">About us</p>
+        <h1 class="gtc-animate-1">Who we are and what we are trying to build</h1>
+        <p class="gtc-animate-2 mt-3 mb-0">
+          The Green Technology Club is a student-led proposal for a campus club
+          focused on sustainable technology. This page explains what we stand
+          for, who we are for, and what members actually do.
+        </p>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ========================================================================
+       ABOUT THE CLUB
+       ======================================================================== -->
+  <section class="gtc-section">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+
+        <div class="col-lg-7">
+          <p class="gtc-eyebrow">Our background</p>
+          <h2>Started because the topic kept coming up</h2>
+          <p class="mt-3">
+            Sustainability appears in almost every course now, but usually as a
+            single slide near the end of a lecture. Students hear the terms
+            &mdash; carbon footprint, renewable capacity, smart grid &mdash;
+            without ever seeing how the technology behind them works.
+          </p>
+          <p>
+            The Green Technology Club exists to close that gap. It is a place
+            where students take one technology at a time, study it properly,
+            and then explain it to each other in plain language. Everything
+            published on this website comes out of those sessions.
+          </p>
+          <p class="mb-0">
+            The club is open to every degree programme. Some members come from
+            technical courses, others from business or communication. That mix
+            is deliberate: green technology is not only an engineering problem.
+          </p>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="gtc-card">
+            <div class="gtc-card__media"
+                 style="background-image: linear-gradient(150deg, rgba(20,83,45,.5), rgba(102,187,106,.3)), url('images/about-team.jpg');"
+                 role="img" aria-label="Students working together on a sustainability project"></div>
+            <div class="gtc-card__body">
+              <h3>Open to everyone</h3>
+              <p class="mb-0">
+                No technical background required. Curiosity and a willingness
+                to turn up are the only entry requirements.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       MISSION AND VISION
+       ======================================================================== -->
+  <section class="gtc-section gtc-section--pale">
+    <div class="container">
+      <div class="row g-4">
+
+        <div class="col-lg-6">
+          <div class="gtc-mini-card h-100">
+            <span class="gtc-mini-card__icon"><i class="bi bi-compass"></i></span>
+            <h3>Our mission</h3>
+            <p>
+              To give students a practical, honest understanding of green
+              technology by studying it together, building small projects, and
+              sharing what we learn with the wider campus community.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="gtc-mini-card h-100">
+            <span class="gtc-mini-card__icon"><i class="bi bi-binoculars"></i></span>
+            <h3>Our vision</h3>
+            <p>
+              A campus where sustainable technology is something students
+              understand and question, not just something they are told to
+              support &mdash; and where every graduate leaves able to explain
+              at least one green technology properly.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       OBJECTIVES
+       ======================================================================== -->
+  <section class="gtc-section">
+    <div class="container">
+
+      <div class="gtc-section-intro">
+        <p class="gtc-eyebrow">Objectives</p>
+        <h2>What the club sets out to do</h2>
+        <p>
+          Four objectives guide how we plan sessions, choose projects and
+          measure whether a semester went well.
+        </p>
+      </div>
+
+      <div class="row g-4">
+
+        <div class="col-md-6 col-lg-3">
+          <div class="gtc-mini-card">
+            <span class="gtc-mini-card__icon"><i class="bi bi-book"></i></span>
+            <h3>Build knowledge</h3>
+            <p>Run regular sessions that explain one green technology clearly and accurately.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="gtc-mini-card">
+            <span class="gtc-mini-card__icon"><i class="bi bi-cpu"></i></span>
+            <h3>Apply it</h3>
+            <p>Turn each topic into a small project, demonstration or measurement students can try.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="gtc-mini-card">
+            <span class="gtc-mini-card__icon"><i class="bi bi-megaphone"></i></span>
+            <h3>Reach the campus</h3>
+            <p>Hold open events so the benefit is not limited to club members only.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+          <div class="gtc-mini-card">
+            <span class="gtc-mini-card__icon"><i class="bi bi-recycle"></i></span>
+            <h3>Change habits</h3>
+            <p>Support practical campus initiatives such as e-waste collection and energy saving.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       WHY GREEN TECHNOLOGY MATTERS
+       ======================================================================== -->
+  <section class="gtc-section gtc-section--dark">
+    <div class="container">
+      <div class="row g-5">
+
+        <div class="col-lg-5">
+          <p class="gtc-eyebrow">The bigger picture</p>
+          <h2>Why green technology matters</h2>
+          <p class="mt-3 mb-0">
+            Malaysia sits in a region where the effects of a warming climate
+            are already visible &mdash; heavier rainfall, longer dry spells,
+            and haze episodes that close schools. Green technology is the part
+            of the response that students can realistically take part in.
+          </p>
+        </div>
+
+        <div class="col-lg-7">
+          <div class="row g-4">
+
+            <div class="col-sm-6">
+              <h3 class="h5">Energy demand keeps rising</h3>
+              <p>
+                More devices, more cooling, more data centres. Renewable
+                capacity has to grow faster than demand, not just grow.
+              </p>
+            </div>
+
+            <div class="col-sm-6">
+              <h3 class="h5">Transport is changing now</h3>
+              <p>
+                Electric vehicles are moving from novelty to normal. Knowing
+                how they work is becoming a basic literacy, not a specialism.
+              </p>
+            </div>
+
+            <div class="col-sm-6">
+              <h3 class="h5">Cities generate the data</h3>
+              <p>
+                Sensors already measure air quality, traffic and energy use.
+                The skill now is reading that data and acting on it.
+              </p>
+            </div>
+
+            <div class="col-sm-6">
+              <h3 class="h5">Employers are looking for it</h3>
+              <p>
+                Sustainability roles are appearing across engineering, business
+                and IT. Early exposure is a real advantage.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       TARGET AUDIENCE
+       ======================================================================== -->
+  <section class="gtc-section">
+    <div class="container">
+
+      <div class="gtc-section-intro">
+        <p class="gtc-eyebrow">Who this is for</p>
+        <h2>Our target audience</h2>
+        <p>
+          The club was designed with four groups in mind. If you recognise
+          yourself in any of them, you will fit in.
+        </p>
+      </div>
+
+      <div class="row g-4">
+
+        <div class="col-md-6">
+          <div class="gtc-mini-card">
+            <span class="gtc-mini-card__icon"><i class="bi bi-mortarboard"></i></span>
+            <h3>Students new to the topic</h3>
+            <p>
+              You have heard the terms but never had them explained. Sessions
+              start from the beginning and assume nothing.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="gtc-mini-card">
+            <span class="gtc-mini-card__icon"><i class="bi bi-wrench-adjustable"></i></span>
+            <h3>Technical students</h3>
+            <p>
+              Engineering, IT and science students who want to apply what they
+              are studying to a real sustainability problem.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="gtc-mini-card">
+            <span class="gtc-mini-card__icon"><i class="bi bi-briefcase"></i></span>
+            <h3>Business and communication students</h3>
+            <p>
+              The people who will eventually have to fund, sell or explain
+              these technologies to everyone else.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="gtc-mini-card">
+            <span class="gtc-mini-card__icon"><i class="bi bi-flag"></i></span>
+            <h3>Campus community</h3>
+            <p>
+              Staff and student bodies who want support running sustainability
+              activities on campus.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       BENEFITS OF JOINING
+       ======================================================================== -->
+  <section class="gtc-section gtc-section--offwhite">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+
+        <div class="col-lg-5">
+          <p class="gtc-eyebrow">Benefits</p>
+          <h2>What members get</h2>
+          <p class="mt-3">
+            Membership is free. What it costs you is time, and what it gives
+            you back is listed here.
+          </p>
+          <a class="btn btn-gtc-primary mt-2" href="events.html#register">Register your interest</a>
+        </div>
+
+        <div class="col-lg-7">
+          <div class="row g-3">
+
+            <div class="col-sm-6">
+              <div class="gtc-mini-card">
+                <span class="gtc-mini-card__icon"><i class="bi bi-clipboard-check"></i></span>
+                <h3>Skills you can show</h3>
+                <p>Presenting, running events, working in a project team.</p>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="gtc-mini-card">
+                <span class="gtc-mini-card__icon"><i class="bi bi-people-fill"></i></span>
+                <h3>A cross-course network</h3>
+                <p>Members from programmes you would otherwise never work with.</p>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="gtc-mini-card">
+                <span class="gtc-mini-card__icon"><i class="bi bi-boxes"></i></span>
+                <h3>Project experience</h3>
+                <p>Something concrete to talk about in an interview.</p>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="gtc-mini-card">
+                <span class="gtc-mini-card__icon"><i class="bi bi-award"></i></span>
+                <h3>Recognition</h3>
+                <p>Participation records for members who contribute to club activities.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       CLUB ACTIVITIES  (Bootstrap accordion)
+       ======================================================================== -->
+  <section class="gtc-section">
+    <div class="container">
+
+      <div class="gtc-section-intro">
+        <p class="gtc-eyebrow">Activities</p>
+        <h2>What a semester looks like</h2>
+        <p>
+          Select an activity to see how it runs and what taking part involves.
+        </p>
+      </div>
+
+      <div class="accordion" id="activitiesAccordion">
+
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#activity1" aria-expanded="true" aria-controls="activity1">
+              Weekly learning sessions
+            </button>
+          </h3>
+          <div id="activity1" class="accordion-collapse collapse show"
+               data-bs-parent="#activitiesAccordion">
+            <div class="accordion-body">
+              One member prepares a short talk on a single technology &mdash;
+              how it works, what it costs, where it is used. The rest of the
+              session is questions and discussion. Slides are shared afterwards
+              so members who missed it can still follow along.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#activity2" aria-expanded="false" aria-controls="activity2">
+              Hands-on project builds
+            </button>
+          </h3>
+          <div id="activity2" class="accordion-collapse collapse"
+               data-bs-parent="#activitiesAccordion">
+            <div class="accordion-body">
+              Small teams build something testable: a solar-charged sensor, an
+              energy monitor for a study room, or a data dashboard. Projects
+              are deliberately small enough to finish within a semester.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#activity3" aria-expanded="false" aria-controls="activity3">
+              Campus awareness campaigns
+            </button>
+          </h3>
+          <div id="activity3" class="accordion-collapse collapse"
+               data-bs-parent="#activitiesAccordion">
+            <div class="accordion-body">
+              Open activities such as e-waste collection points, recycling
+              drives and energy-saving weeks. These are run with other student
+              bodies so they reach beyond club members.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#activity4" aria-expanded="false" aria-controls="activity4">
+              Talks, exhibitions and challenges
+            </button>
+          </h3>
+          <div id="activity4" class="accordion-collapse collapse"
+               data-bs-parent="#activitiesAccordion">
+            <div class="accordion-body">
+              Larger events including seminars, an electric vehicle exhibition
+              and a sustainable technology challenge. These are listed on the
+              events page with registration open to all students.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       COMMITTEE  (names to be filled in by the group)
+       ======================================================================== -->
+  <section class="gtc-section gtc-section--pale">
+    <div class="container">
+
+      <div class="gtc-section-intro">
+        <p class="gtc-eyebrow">Committee</p>
+        <h2>Who runs the club</h2>
+        <p>
+          The proposed committee for the first term. Contact any of us if you
+          would like to know more before joining.
+        </p>
+      </div>
+
+      <div class="row g-4">
+
+        <div class="col-md-4">
+          <div class="gtc-mini-card text-center">
+            <span class="gtc-mini-card__icon mx-auto"><i class="bi bi-person"></i></span>
+            <h3>[Member 1 Name]</h3>
+            <p>President</p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="gtc-mini-card text-center">
+            <span class="gtc-mini-card__icon mx-auto"><i class="bi bi-person"></i></span>
+            <h3>[Member 2 Name]</h3>
+            <p>Secretary</p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="gtc-mini-card text-center">
+            <span class="gtc-mini-card__icon mx-auto"><i class="bi bi-person"></i></span>
+            <h3>[Member 3 Name]</h3>
+            <p>Technical Lead</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       LINK TO EVENTS
+       ======================================================================== -->
+  <section class="gtc-section gtc-on-dark">
+    <div class="container">
+      <div class="gtc-cta">
+        <h2>Come to an event before you decide</h2>
+        <p>
+          The easiest way to see whether the club suits you is to attend one
+          session. Our upcoming events are open to all students.
+        </p>
+        <a class="btn btn-gtc-accent" href="events.html">See upcoming events</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+<!-- ==========================================================================
+     FOOTER  (identical on all six pages)
+     ========================================================================== -->
+<footer class="gtc-footer">
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-lg-4">
+        <div class="gtc-footer__brand">
+          <svg class="gtc-logo" viewBox="0 0 40 40" aria-hidden="true">
+            <path d="M20 35C8 29 6 14 20 5C34 14 32 29 20 35Z" fill="none" stroke="#66BB6A" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M20 34V9M20 24L12.5 19M20 17.5L27.5 12.5" stroke="#66BB6A" stroke-width="1.6" stroke-linecap="round"/>
+            <circle cx="12.5" cy="19" r="2.2" fill="#F2A900"/>
+            <circle cx="27.5" cy="12.5" r="2.2" fill="#F2A900"/>
+          </svg>
+          Green Technology Club
+        </div>
+        <p>
+          A proposed student club promoting renewable energy, electric
+          vehicles, smart cities and sustainable technology on campus.
+        </p>
+      </div>
+
+      <div class="col-6 col-lg-2">
+        <h4>Explore</h4>
+        <ul class="gtc-footer__list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="events.html">Events</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-lg-3">
+        <h4>Topics</h4>
+        <ul class="gtc-footer__list">
+          <li><a href="renewable.html">Renewable Energy</a></li>
+          <li><a href="ev.html">Electric Vehicles</a></li>
+          <li><a href="smart-city.html">Smart Cities</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-3">
+        <h4>Follow us</h4>
+        <p class="mb-0">Club social media accounts are being set up.</p>
+        <div class="gtc-footer__social">
+          <a href="events.html#follow" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="events.html#follow" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="events.html#follow" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="gtc-footer__bottom">
+      <div class="d-flex flex-wrap justify-content-between gap-2">
+        <p>&copy; <span id="footerYear">2026</span> Green Technology Club.</p>
+        <button type="button" class="gtc-footer__reset" id="cookieResetBtn">
+          Reset cookie preferences
+        </button>
+      </div>
+      <p class="gtc-disclaimer">
+        This website was created as a student coursework project. The club
+        described here is a proposal and is not an officially registered
+        organisation.
+      </p>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ==========================================================================
+     COOKIE NOTICE  (identical on all six pages, hidden until needed)
+     ========================================================================== -->
+<div class="gtc-cookie-banner" id="cookieBanner" role="region" aria-label="Cookie notice" hidden>
+  <div class="container">
+    <div class="gtc-cookie-banner__inner">
+      <p class="gtc-cookie-banner__text">
+        <i class="bi bi-shield-check"></i>
+        This website uses cookies to improve your browsing experience and to
+        remember your preferences on your next visit.
+      </p>
+      <div class="gtc-cookie-banner__actions">
+        <button type="button" class="btn btn-gtc-accent" id="cookieAcceptBtn">Accept</button>
+        <button type="button" class="gtc-cookie-banner__dismiss" id="cookieDismissBtn">Not now</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Scripts: jQuery first, then Bootstrap, then our own file -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/script.js"></script>
+
+</body>
+</html>

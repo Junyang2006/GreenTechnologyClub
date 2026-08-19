@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="How solar, wind, hydro and biomass energy work, their benefits and challenges, plus a rooftop solar savings calculator.">
+  <title>Renewable Energy | Green Technology Club</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons (CSS only, no JavaScript) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Our own stylesheet, loaded last so it can override Bootstrap -->
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<a class="gtc-skip-link" href="#main-content">Skip to main content</a>
+
+
+<!-- ==========================================================================
+     NAVBAR  (identical on all six pages - only the "active" class moves)
+     ========================================================================== -->
+<nav class="navbar navbar-expand-lg gtc-navbar sticky-top" aria-label="Main navigation">
+  <div class="container">
+
+    <a class="navbar-brand" href="index.html">
+      <svg class="gtc-logo" viewBox="0 0 40 40" role="img" aria-label="Green Technology Club logo">
+        <path d="M20 35C8 29 6 14 20 5C34 14 32 29 20 35Z" fill="#E9F3EA" stroke="#2E7D32" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M20 34V9M20 24L12.5 19M20 17.5L27.5 12.5M20 29L26.5 24.5" stroke="#2E7D32" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="12.5" cy="19" r="2.2" fill="#F2A900"/>
+        <circle cx="27.5" cy="12.5" r="2.2" fill="#F2A900"/>
+        <circle cx="26.5" cy="24.5" r="2.2" fill="#F2A900"/>
+      </svg>
+      <span class="gtc-brand-text">
+        Green Technology Club
+        <small>Student Initiative</small>
+      </span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#gtcNavMenu" aria-controls="gtcNavMenu"
+            aria-expanded="false" aria-label="Toggle navigation menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="gtcNavMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="renewable.html">Renewable Energy</a></li>
+        <li class="nav-item"><a class="nav-link" href="ev.html">Electric Vehicles</a></li>
+        <li class="nav-item"><a class="nav-link" href="smart-city.html">Smart Cities</a></li>
+        <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
+        <li class="nav-item ms-lg-3">
+          <a class="btn btn-gtc-accent" href="events.html#register">Join Us</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+<!-- ==========================================================================
+     WELCOME BAR  (only appears when a name is stored in a cookie)
+     ========================================================================== -->
+<div class="gtc-welcome" id="gtcWelcome" hidden>
+  <div class="container">
+    <div class="gtc-welcome__inner">
+      <p class="gtc-welcome__text" id="gtcWelcomeText"></p>
+      <button type="button" class="gtc-welcome__btn" id="gtcForgetBtn">Not you?</button>
+    </div>
+  </div>
+</div>
+
+
+<main id="main-content">
+
+  <!-- ========================================================================
+       PAGE HEADER
+       ======================================================================== -->
+  <header class="gtc-section gtc-section--dark">
+    <div class="container">
+      <div class="gtc-section-intro mb-0">
+        <p class="gtc-eyebrow gtc-animate-1">Renewable energy</p>
+        <h1 class="gtc-animate-1">Energy that refills itself faster than we use it</h1>
+        <p class="gtc-animate-2 mt-3 mb-0">
+          Coal and gas took millions of years to form and are burned once.
+          Renewable sources are replaced continuously by sunlight, weather and
+          plant growth. This page covers the four that matter most in a
+          tropical climate, what each one is good at, and where each one
+          struggles.
+        </p>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ========================================================================
+       INTRODUCTION
+       ======================================================================== -->
+  <section class="gtc-section">
+    <div class="container">
+      <div class="row g-5">
+
+        <div class="col-lg-7">
+          <p class="gtc-eyebrow">Introduction</p>
+          <h2>The same job, four different methods</h2>
+          <p class="mt-3">
+            Every source on this page does one thing: it turns some form of
+            natural energy into electricity. What separates them is where that
+            energy comes from, how reliably it arrives, and how much land,
+            water or money is needed to capture it.
+          </p>
+          <p class="mb-0">
+            No single source is best everywhere. Malaysia receives strong
+            sunlight all year but has low average wind speeds, so a mix that
+            works well in Denmark would perform poorly here. Choosing the
+            right technology for the location is most of the engineering work.
+          </p>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="gtc-mini-card h-100">
+            <span class="gtc-mini-card__icon"><i class="bi bi-info-circle"></i></span>
+            <h3>How to use this page</h3>
+            <p>
+              Each card below gives a short summary. Select <strong>Learn
+              more</strong> for the detail: how it works, what it costs, and
+              its main limitation. The calculator further down estimates what
+              rooftop solar could save on a real electricity bill.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       FOUR RENEWABLE SOURCES  (Bootstrap cards + modals)
+       ======================================================================== -->
+  <section class="gtc-section gtc-section--offwhite">
+    <div class="container">
+
+      <div class="gtc-section-intro">
+        <p class="gtc-eyebrow">The sources</p>
+        <h2>Four ways to generate clean electricity</h2>
+        <p>
+          Solar and hydro already supply most of Malaysia's renewable output.
+          Wind and biomass play smaller but growing roles.
+        </p>
+      </div>
+
+      <div class="row g-4">
+
+        <!-- Solar -->
+        <div class="col-md-6 col-lg-3">
+          <article class="gtc-card">
+            <div class="gtc-card__media"
+                 style="background-image: linear-gradient(140deg, rgba(20,83,45,.5), rgba(242,169,0,.35)), url('images/renew-solar.jpg');"
+                 role="img" aria-label="Rooftop solar panels in bright sunlight"></div>
+            <div class="gtc-card__body">
+              <span class="gtc-tag">Solar</span>
+              <h3>Solar Energy</h3>
+              <p>
+                Panels convert sunlight straight into electricity with no
+                moving parts. The most practical option for Malaysian
+                rooftops.
+              </p>
+              <button type="button" class="btn btn-gtc-outline btn-sm"
+                      data-bs-toggle="modal" data-bs-target="#modalSolar">
+                Learn more
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <!-- Wind -->
+        <div class="col-md-6 col-lg-3">
+          <article class="gtc-card">
+            <div class="gtc-card__media"
+                 style="background-image: linear-gradient(140deg, rgba(20,83,45,.5), rgba(102,187,106,.35)), url('images/renew-wind.jpg');"
+                 role="img" aria-label="Wind turbines on open land"></div>
+            <div class="gtc-card__body">
+              <span class="gtc-tag">Wind</span>
+              <h3>Wind Energy</h3>
+              <p>
+                Moving air spins a turbine that drives a generator. Extremely
+                cheap where the wind is strong and steady.
+              </p>
+              <button type="button" class="btn btn-gtc-outline btn-sm"
+                      data-bs-toggle="modal" data-bs-target="#modalWind">
+                Learn more
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <!-- Hydro -->
+        <div class="col-md-6 col-lg-3">
+          <article class="gtc-card">
+            <div class="gtc-card__media"
+                 style="background-image: linear-gradient(140deg, rgba(20,83,45,.5), rgba(66,165,245,.3)), url('images/renew-hydro.jpg');"
+                 role="img" aria-label="Water flowing through a hydroelectric dam"></div>
+            <div class="gtc-card__body">
+              <span class="gtc-tag">Hydro</span>
+              <h3>Hydropower</h3>
+              <p>
+                Falling water turns a turbine. Malaysia's largest renewable
+                source and the only one that can store energy at scale.
+              </p>
+              <button type="button" class="btn btn-gtc-outline btn-sm"
+                      data-bs-toggle="modal" data-bs-target="#modalHydro">
+                Learn more
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <!-- Biomass -->
+        <div class="col-md-6 col-lg-3">
+          <article class="gtc-card">
+            <div class="gtc-card__media"
+                 style="background-image: linear-gradient(140deg, rgba(20,83,45,.55), rgba(139,195,74,.35)), url('images/renew-biomass.jpg');"
+                 role="img" aria-label="Agricultural plant waste used as biomass fuel"></div>
+            <div class="gtc-card__body">
+              <span class="gtc-tag">Biomass</span>
+              <h3>Biomass</h3>
+              <p>
+                Plant waste is burned or converted to gas. Turns agricultural
+                by-products into power instead of leaving them to rot.
+              </p>
+              <button type="button" class="btn btn-gtc-outline btn-sm"
+                      data-bs-toggle="modal" data-bs-target="#modalBiomass">
+                Learn more
+              </button>
+            </div>
+          </article>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       SOLAR SAVINGS CALCULATOR
+       localStorage + jQuery + parseFloat / isNaN / isFinite
+       ======================================================================== -->
+  <section class="gtc-section">
+    <div class="container">
+
+      <div class="gtc-section-intro">
+        <p class="gtc-eyebrow">Try the numbers</p>
+        <h2>Rooftop solar savings calculator</h2>
+        <p>
+          Enter a monthly electricity bill and the roof area available. The
+          calculator estimates the system size that would fit, what it would
+          generate, and what it would save. Every result is kept in your
+          browser so you can compare different roof sizes.
+        </p>
+      </div>
+
+      <div class="row g-4">
+
+        <div class="col-lg-7">
+          <div class="gtc-calc">
+
+            <form id="solarForm" novalidate>
+              <div class="row g-3">
+
+                <div class="col-sm-6">
+                  <label for="solarBill" class="form-label">
+                    Monthly electricity bill (RM)
+                  </label>
+                  <input type="number" class="form-control" id="solarBill"
+                         min="1" step="0.01" placeholder="e.g. 180">
+                  <div class="form-text">Take this from a recent bill.</div>
+                </div>
+
+                <div class="col-sm-6">
+                  <label for="solarRoof" class="form-label">
+                    Usable roof area (m&sup2;)
+                  </label>
+                  <input type="number" class="form-control" id="solarRoof"
+                         min="1" step="0.1" placeholder="e.g. 40">
+                  <div class="form-text">Only the part that gets full sun.</div>
+                </div>
+
+                <div class="col-12">
+                  <button type="submit" class="btn btn-gtc-primary">
+                    Calculate savings
+                  </button>
+                </div>
+
+              </div>
+            </form>
+
+            <!-- Results appear here after a successful calculation -->
+            <div class="gtc-result" id="solarResult" style="display: none;">
+              <h3>Estimated result</h3>
+              <div class="gtc-result-grid">
+                <div class="gtc-result-item">
+                  <span>System size</span>
+                  <strong id="solarSize">&mdash;</strong>
+                </div>
+                <div class="gtc-result-item">
+                  <span>Generated / month</span>
+                  <strong id="solarGeneration">&mdash;</strong>
+                </div>
+                <div class="gtc-result-item">
+                  <span>Saved / month</span>
+                  <strong id="solarMonthly">&mdash;</strong>
+                </div>
+                <div class="gtc-result-item gtc-result-item--highlight">
+                  <span>Saved / year</span>
+                  <strong id="solarYearly">&mdash;</strong>
+                </div>
+                <div class="gtc-result-item">
+                  <span>CO&sup2; avoided / year</span>
+                  <strong id="solarCo2">&mdash;</strong>
+                </div>
+              </div>
+            </div>
+
+            <p class="gtc-note">
+              <strong>Assumptions used:</strong> electricity at RM0.50 per kWh,
+              6 m&sup2; of roof per 1 kWp installed, 120 kWh generated per kWp
+              each month, and 0.585 kg of CO&sup2; per kWh from the grid.
+              These are simplified teaching figures for this student project,
+              not a quotation. Real tariffs are tiered and real output depends
+              on roof angle, shading and equipment.
+            </p>
+
+            <!-- Saved estimates - localStorage output -->
+            <div class="gtc-saved">
+              <div class="gtc-saved__head">
+                <h3>My saved estimates</h3>
+                <button type="button" class="btn btn-gtc-outline btn-sm"
+                        id="solarClearBtn">Clear all</button>
+              </div>
+              <ul class="gtc-saved-list" id="solarSavedList"></ul>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="gtc-mini-card h-100">
+            <span class="gtc-mini-card__icon"><i class="bi bi-hdd"></i></span>
+            <h3>Where your estimates are stored</h3>
+            <p>
+              Saved estimates are written to your browser's
+              <strong>localStorage</strong>. Nothing is sent anywhere and no
+              account is needed. Because localStorage has no expiry date, the
+              list is still here after you close the browser and come back
+              tomorrow.
+            </p>
+            <p class="mb-0">
+              Select <strong>Clear all</strong> at any time to delete
+              everything this page has stored.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       BENEFITS AND CHALLENGES
+       ======================================================================== -->
+  <section class="gtc-section gtc-section--pale">
+    <div class="container">
+
+      <div class="gtc-section-intro">
+        <p class="gtc-eyebrow">An honest view</p>
+        <h2>Benefits and challenges</h2>
+        <p>
+          Renewable energy is not free of problems. Understanding the
+          limitations is what separates informed support from slogans.
+        </p>
+      </div>
+
+      <div class="row g-4">
+
+        <div class="col-lg-6">
+          <div class="gtc-mini-card h-100">
+            <span class="gtc-mini-card__icon"><i class="bi bi-hand-thumbs-up"></i></span>
+            <h3>Benefits</h3>
+            <ul class="gtc-list">
+              <li><i class="bi bi-check-circle-fill"></i>
+                <span>No fuel is burned during operation, so there are no
+                carbon emissions from generation itself.</span></li>
+              <li><i class="bi bi-check-circle-fill"></i>
+                <span>Sunlight, wind and water are not bought, so running
+                costs stay low and predictable for decades.</span></li>
+              <li><i class="bi bi-check-circle-fill"></i>
+                <span>Less dependence on imported fuel and on international
+                price swings.</span></li>
+              <li><i class="bi bi-check-circle-fill"></i>
+                <span>Systems can be small. A single household can generate
+                its own power; a coal plant cannot be built one roof at a
+                time.</span></li>
+              <li><i class="bi bi-check-circle-fill"></i>
+                <span>Installation, maintenance and grid work create skilled
+                local jobs.</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="gtc-mini-card h-100">
+            <span class="gtc-mini-card__icon"><i class="bi bi-exclamation-triangle"></i></span>
+            <h3>Challenges</h3>
+            <ul class="gtc-list gtc-list--warn">
+              <li><i class="bi bi-dash-circle-fill"></i>
+                <span><strong>Intermittency.</strong> Solar stops at night and
+                drops under cloud. Supply has to match demand every second.</span></li>
+              <li><i class="bi bi-dash-circle-fill"></i>
+                <span><strong>Storage cost.</strong> Batteries fix
+                intermittency but are still expensive at grid scale.</span></li>
+              <li><i class="bi bi-dash-circle-fill"></i>
+                <span><strong>Upfront investment.</strong> Cheap to run, but
+                the installation cost arrives all at once.</span></li>
+              <li><i class="bi bi-dash-circle-fill"></i>
+                <span><strong>Land and water use.</strong> Large solar farms
+                and reservoirs occupy space that had another purpose.</span></li>
+              <li><i class="bi bi-dash-circle-fill"></i>
+                <span><strong>End of life.</strong> Panels and blades need
+                recycling routes that are still being developed.</span></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       CALL TO ACTION
+       ======================================================================== -->
+  <section class="gtc-section gtc-on-dark">
+    <div class="container">
+      <div class="gtc-cta">
+        <h2>Want to go deeper on this?</h2>
+        <p>
+          Our Renewable Energy Seminar covers how these systems are sized,
+          costed and connected to the grid in practice.
+        </p>
+        <a class="btn btn-gtc-accent" href="events.html">See upcoming events</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+<!-- ==========================================================================
+     MODALS  (opened by the "Learn more" buttons above)
+     ========================================================================== -->
+
+<div class="modal fade" id="modalSolar" tabindex="-1"
+     aria-labelledby="modalSolarLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title h5" id="modalSolarLabel">Solar Energy</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h3 class="h6">How it works</h3>
+        <p>
+          A solar panel is made of silicon cells. When sunlight hits a cell it
+          knocks electrons loose, and the cell's structure pushes those
+          electrons in one direction. That flow is direct current. An inverter
+          then converts it to the alternating current used by household
+          appliances and the grid.
+        </p>
+        <h3 class="h6">Why it suits Malaysia</h3>
+        <p>
+          Sunlight here is strong and consistent throughout the year, without
+          the long dark winters that limit solar output in temperate
+          countries. Panels have no moving parts, so maintenance is mostly
+          keeping the surface clean.
+        </p>
+        <h3 class="h6">Main limitation</h3>
+        <p class="mb-0">
+          Output stops completely at night and falls sharply under heavy
+          cloud. Without a battery, a household still depends on the grid
+          after dark, which is why solar is usually a bill reducer rather than
+          a full replacement.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-gtc-outline btn-sm"
+                data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalWind" tabindex="-1"
+     aria-labelledby="modalWindLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title h5" id="modalWindLabel">Wind Energy</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h3 class="h6">How it works</h3>
+        <p>
+          Turbine blades are shaped like aircraft wings. Moving air passing
+          over them creates lift, which turns the rotor. The rotor drives a
+          generator through a gearbox, and the generator produces electricity.
+        </p>
+        <h3 class="h6">Where it performs best</h3>
+        <p>
+          Power rises steeply with wind speed, so a site with consistently
+          strong wind produces far more than a site with occasional gusts.
+          Coastlines, open plains and offshore locations are ideal.
+        </p>
+        <h3 class="h6">Main limitation</h3>
+        <p class="mb-0">
+          Peninsular Malaysia has relatively low average wind speeds, which
+          makes large-scale wind less attractive here than solar. Turbines
+          also need spacing, so a wind farm covers a wide area even though the
+          ground between towers can still be farmed.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-gtc-outline btn-sm"
+                data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalHydro" tabindex="-1"
+     aria-labelledby="modalHydroLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title h5" id="modalHydroLabel">Hydropower</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h3 class="h6">How it works</h3>
+        <p>
+          Water held behind a dam has potential energy because of its height.
+          When it is released it falls through a turbine, and that movement
+          drives a generator. The higher the drop and the greater the flow,
+          the more electricity is produced.
+        </p>
+        <h3 class="h6">Its unique advantage</h3>
+        <p>
+          Hydro is the only renewable source on this page that can be turned
+          up or down on demand. Water can also be pumped back uphill when
+          electricity is cheap and released when demand peaks, which makes a
+          reservoir act as a very large battery.
+        </p>
+        <h3 class="h6">Main limitation</h3>
+        <p class="mb-0">
+          Building a reservoir floods land, displaces communities and changes
+          river ecosystems downstream. Extended dry periods also reduce output
+          exactly when demand for cooling is highest.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-gtc-outline btn-sm"
+                data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalBiomass" tabindex="-1"
+     aria-labelledby="modalBiomassLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title h5" id="modalBiomassLabel">Biomass</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h3 class="h6">How it works</h3>
+        <p>
+          Plant material is burned to boil water, and the steam drives a
+          turbine. Alternatively the material can be broken down by bacteria
+          in a sealed tank to produce biogas, which is then burned in an
+          engine or gas turbine.
+        </p>
+        <h3 class="h6">Why it counts as renewable</h3>
+        <p>
+          The carbon released was absorbed from the air by the plant while it
+          grew, and the next crop absorbs it again. It is treated as renewable
+          only when the material is genuinely replanted and not taken from
+          cleared forest.
+        </p>
+        <h3 class="h6">Main limitation</h3>
+        <p class="mb-0">
+          Burning still produces local air pollution, so exhaust treatment is
+          essential. Supply also depends on agricultural waste being collected
+          and transported, which adds cost and its own emissions.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-gtc-outline btn-sm"
+                data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ==========================================================================
+     FOOTER  (identical on all six pages)
+     ========================================================================== -->
+<footer class="gtc-footer">
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-lg-4">
+        <div class="gtc-footer__brand">
+          <svg class="gtc-logo" viewBox="0 0 40 40" aria-hidden="true">
+            <path d="M20 35C8 29 6 14 20 5C34 14 32 29 20 35Z" fill="none" stroke="#66BB6A" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M20 34V9M20 24L12.5 19M20 17.5L27.5 12.5" stroke="#66BB6A" stroke-width="1.6" stroke-linecap="round"/>
+            <circle cx="12.5" cy="19" r="2.2" fill="#F2A900"/>
+            <circle cx="27.5" cy="12.5" r="2.2" fill="#F2A900"/>
+          </svg>
+          Green Technology Club
+        </div>
+        <p>
+          A proposed student club promoting renewable energy, electric
+          vehicles, smart cities and sustainable technology on campus.
+        </p>
+      </div>
+
+      <div class="col-6 col-lg-2">
+        <h4>Explore</h4>
+        <ul class="gtc-footer__list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="events.html">Events</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-lg-3">
+        <h4>Topics</h4>
+        <ul class="gtc-footer__list">
+          <li><a href="renewable.html">Renewable Energy</a></li>
+          <li><a href="ev.html">Electric Vehicles</a></li>
+          <li><a href="smart-city.html">Smart Cities</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-3">
+        <h4>Follow us</h4>
+        <p class="mb-0">Club social media accounts are being set up.</p>
+        <div class="gtc-footer__social">
+          <a href="events.html#follow" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="events.html#follow" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="events.html#follow" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="gtc-footer__bottom">
+      <div class="d-flex flex-wrap justify-content-between gap-2">
+        <p>&copy; <span id="footerYear">2026</span> Green Technology Club.</p>
+        <button type="button" class="gtc-footer__reset" id="cookieResetBtn">
+          Reset cookie preferences
+        </button>
+      </div>
+      <p class="gtc-disclaimer">
+        This website was created as a student coursework project. The club
+        described here is a proposal and is not an officially registered
+        organisation.
+      </p>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ==========================================================================
+     COOKIE NOTICE  (identical on all six pages, hidden until needed)
+     ========================================================================== -->
+<div class="gtc-cookie-banner" id="cookieBanner" role="region" aria-label="Cookie notice" hidden>
+  <div class="container">
+    <div class="gtc-cookie-banner__inner">
+      <p class="gtc-cookie-banner__text">
+        <i class="bi bi-shield-check"></i>
+        This website uses cookies to improve your browsing experience and to
+        remember your preferences on your next visit.
+      </p>
+      <div class="gtc-cookie-banner__actions">
+        <button type="button" class="btn btn-gtc-accent" id="cookieAcceptBtn">Accept</button>
+        <button type="button" class="gtc-cookie-banner__dismiss" id="cookieDismissBtn">Not now</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Scripts: jQuery first, then Bootstrap, then our own file -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/script.js"></script>
+
+</body>
+</html>
