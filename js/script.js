@@ -163,7 +163,11 @@ function setUpCookieBanner() {
   acceptBtn.addEventListener("click", function () {
     setCookie(COOKIE_CONSENT_NAME, "accepted", COOKIE_LIFETIME_DAYS);
     banner.hidden = true;
-    askForVisitorName();
+
+    // The visitor is NOT interrupted with a question here. The welcome bar
+    // simply appears and offers to personalise the site, and nothing else
+    // happens unless they choose to use it.
+    showWelcomeBar();
   });
 
   // "Not now" hides the notice without saving anything, so it appears
@@ -179,13 +183,12 @@ function setUpCookieBanner() {
 
 /* --------------------------------------------------------------------------
    askForVisitorName()
-   Runs once, straight after the notice is accepted. The name is optional:
-   if the visitor cancels or leaves the box empty, nothing is saved and
-   they are never asked again during this cookie's lifetime.
+   Runs only when the visitor selects "Add your name" in the welcome bar.
+   The name is optional: cancelling or leaving the box empty saves nothing.
    -------------------------------------------------------------------------- */
 function askForVisitorName() {
   var enteredName = prompt(
-    "Thanks! What should we call you on this site? (optional)"
+    "Enter your name to personalise this site. (You can leave this blank.)"
   );
 
   // prompt() returns null when Cancel is pressed.
@@ -210,39 +213,64 @@ function askForVisitorName() {
 
 
 /* --------------------------------------------------------------------------
-   showWelcomeBar()
-   Reads the visitor name cookie and, if a name was saved, greets the
-   visitor on every page of the site.
+   Welcome bar
+   Appears once the cookie notice has been accepted, and has two states:
+
+     no name saved  ->  offers to personalise the site
+     name saved     ->  greets the visitor and offers to forget the name
+
+   Because the name lives in a cookie, the greeting follows the visitor
+   across all six pages.
    -------------------------------------------------------------------------- */
+function setUpWelcomeBar() {
+  var nameBtn = document.getElementById("gtcNameBtn");
+  var forgetBtn = document.getElementById("gtcForgetBtn");
+
+  if (nameBtn) {
+    nameBtn.addEventListener("click", askForVisitorName);
+  }
+
+  if (forgetBtn) {
+    forgetBtn.addEventListener("click", function () {
+      deleteCookie(COOKIE_VISITOR_NAME);
+      showWelcomeBar();
+    });
+  }
+
+  showWelcomeBar();
+}
+
+
 function showWelcomeBar() {
   var welcomeBar = document.getElementById("gtcWelcome");
   var welcomeText = document.getElementById("gtcWelcomeText");
+  var nameBtn = document.getElementById("gtcNameBtn");
   var forgetBtn = document.getElementById("gtcForgetBtn");
 
-  if (!welcomeBar || !welcomeText) {
+  if (!welcomeBar || !welcomeText || !nameBtn || !forgetBtn) {
+    return;
+  }
+
+  // Nothing is shown until the cookie notice has been accepted.
+  if (getCookie(COOKIE_CONSENT_NAME) !== "accepted") {
+    welcomeBar.hidden = true;
     return;
   }
 
   var savedName = getCookie(COOKIE_VISITOR_NAME);
 
   if (savedName === "") {
-    welcomeBar.hidden = true;
-    return;
+    welcomeText.textContent =
+      "Cookies accepted. Add your name and this site will greet you on every page.";
+    nameBtn.hidden = false;
+    forgetBtn.hidden = true;
+  } else {
+    welcomeText.textContent = "Welcome back, " + savedName + ".";
+    nameBtn.hidden = true;
+    forgetBtn.hidden = false;
   }
 
-  welcomeText.textContent = "Welcome back, " + savedName +
-                            ". Good to see you again.";
   welcomeBar.hidden = false;
-
-  // "Not you?" deletes only the name cookie, not the consent cookie.
-  if (forgetBtn && !forgetBtn.dataset.bound) {
-    forgetBtn.dataset.bound = "yes";
-
-    forgetBtn.addEventListener("click", function () {
-      deleteCookie(COOKIE_VISITOR_NAME);
-      welcomeBar.hidden = true;
-    });
-  }
 }
 
 
@@ -676,7 +704,7 @@ document.addEventListener("DOMContentLoaded", function () {
   setFooterYear();
   setUpMobileMenuAutoClose();
   setUpCookieBanner();
-  showWelcomeBar();
+  setUpWelcomeBar();
   setUpCookieReset();
 
   // Member 2 - local storage, calculators and jQuery
