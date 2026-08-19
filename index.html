@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- This site is designed for a light background only. Without this line a
+       phone browser with forced dark mode will invert all of our colours. -->
+  <meta name="color-scheme" content="light">
   <meta name="description" content="Green Technology Club - a proposed student club promoting renewable energy, electric vehicles, smart cities and sustainable technology.">
   <title>Home | Green Technology Club</title>
 
@@ -70,7 +73,8 @@
   <div class="container">
     <div class="gtc-welcome__inner">
       <p class="gtc-welcome__text" id="gtcWelcomeText"></p>
-      <button type="button" class="gtc-welcome__btn" id="gtcForgetBtn">Not you?</button>
+      <button type="button" class="gtc-welcome__btn" id="gtcNameBtn" hidden>Add your name</button>
+      <button type="button" class="gtc-welcome__btn" id="gtcForgetBtn" hidden>Not you?</button>
     </div>
   </div>
 </div>
@@ -81,7 +85,7 @@
   <!-- ========================================================================
        HERO
        ======================================================================== -->
-  <header class="gtc-hero">
+  <header class="gtc-hero gtc-on-dark">
     <div class="container">
       <div class="gtc-hero__content">
 
@@ -100,7 +104,7 @@
           <a class="btn btn-gtc-outline" href="about.html">What we do</a>
         </div>
 
-        <div class="gtc-hero__strip gtc-animate-3 gtc-on-dark">
+        <div class="gtc-hero__strip gtc-animate-3">
           <a class="gtc-hero__strip-item" href="renewable.html">
             <span>01</span> Renewable Energy
           </a>

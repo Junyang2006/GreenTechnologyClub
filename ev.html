@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- This site is designed for a light background only. Without this line a
+       phone browser with forced dark mode will invert all of our colours. -->
+  <meta name="color-scheme" content="light">
   <meta name="description" content="What electric vehicles are, the four main types, how they work, charging, environmental impact, and a running cost calculator.">
   <title>Electric Vehicles | Green Technology Club</title>
 
@@ -69,7 +72,8 @@
   <div class="container">
     <div class="gtc-welcome__inner">
       <p class="gtc-welcome__text" id="gtcWelcomeText"></p>
-      <button type="button" class="gtc-welcome__btn" id="gtcForgetBtn">Not you?</button>
+      <button type="button" class="gtc-welcome__btn" id="gtcNameBtn" hidden>Add your name</button>
+      <button type="button" class="gtc-welcome__btn" id="gtcForgetBtn" hidden>Not you?</button>
     </div>
   </div>
 </div>
@@ -408,7 +412,12 @@
         </p>
       </div>
 
-      <div class="gtc-table table-responsive">
+      <p class="gtc-table-hint">
+        <i class="bi bi-arrow-left-right"></i>
+        Swipe the table sideways to see every column.
+      </p>
+
+      <div class="gtc-table gtc-table--wide">
         <table class="table table-hover mb-0">
           <thead>
             <tr>
@@ -524,7 +533,12 @@
         </p>
       </div>
 
-      <div class="gtc-table table-responsive">
+      <p class="gtc-table-hint">
+        <i class="bi bi-arrow-left-right"></i>
+        Swipe the table sideways to see every column.
+      </p>
+
+      <div class="gtc-table">
         <table class="table table-hover mb-0">
           <thead>
             <tr>
