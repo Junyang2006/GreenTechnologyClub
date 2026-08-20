@@ -330,30 +330,37 @@
 
         <div class="col-lg-5">
 
-          <div class="gtc-mini-card mb-4">
-            <span class="gtc-mini-card__icon"><i class="bi bi-hourglass-split"></i></span>
-            <h3>Why the draft disappears</h3>
+          <div class="gtc-mini-card h-100">
+            <span class="gtc-mini-card__icon"><i class="bi bi-hdd-stack"></i></span>
+            <h3>Two kinds of storage, on purpose</h3>
             <p>
-              Your half-finished form is held in <strong>sessionStorage</strong>,
-              which the browser clears the moment this tab is closed.
+              This page uses both of the browser's storage systems, and the
+              choice between them is deliberate rather than arbitrary.
             </p>
-            <p class="mb-0">
-              That is deliberate. The draft contains your name and email
-              address, and on a shared computer &mdash; a library machine, for
-              example &mdash; that should not still be sitting there for the
-              next person.
-            </p>
-          </div>
 
-          <div class="gtc-mini-card">
-            <span class="gtc-mini-card__icon"><i class="bi bi-hdd"></i></span>
-            <h3>Why the saved list stays</h3>
-            <p>
-              Once you submit, the registration moves into
-              <strong>localStorage</strong>, which has no expiry. Close the
-              browser, come back next week, and your list is still here.
-            </p>
-            <p class="mb-0">
+            <div class="gtc-compare">
+              <div class="gtc-compare__item">
+                <span class="gtc-compare__tag">sessionStorage</span>
+                <strong>Your unfinished form</strong>
+                <p>
+                  Cleared the moment this tab closes. The draft holds your
+                  name and email address, and on a shared computer &mdash; a
+                  library machine, for example &mdash; that should not still
+                  be sitting there for the next person.
+                </p>
+              </div>
+
+              <div class="gtc-compare__item">
+                <span class="gtc-compare__tag">localStorage</span>
+                <strong>Your saved registrations</strong>
+                <p>
+                  Kept with no expiry date. Close the browser, come back next
+                  week, and your list is still exactly where you left it.
+                </p>
+              </div>
+            </div>
+
+            <p class="gtc-note mb-0">
               Nothing is sent to a server. This site is a student coursework
               project with no backend, so your details never leave your own
               device.
@@ -382,52 +389,70 @@
         </p>
       </div>
 
+      <!-- Facebook and YouTube share one row so neither column is left
+           with a large empty space beside it. -->
       <div class="row g-4">
 
         <!-- Facebook Page Plugin -->
-        <div class="col-lg-5">
-          <h3 class="h5 mb-3">Our Facebook page</h3>
+        <div class="col-lg-6">
+          <h3 class="h5 mb-3">
+            <i class="bi bi-facebook"></i> Our Facebook page
+          </h3>
           <div class="gtc-fb-box">
 
             <div class="fb-page"
-                 data-href="https://www.facebook.com/share/1BGQavSA6r/"
+                 data-href="https://www.facebook.com/profile.php?id=61593214932057"
                  data-tabs="timeline"
                  data-width="500"
-                 data-height="400"
+                 data-height="420"
                  data-small-header="false"
                  data-adapt-container-width="true"
                  data-hide-cover="false"
                  data-show-facepile="true">
-              <blockquote cite="https://www.facebook.com/share/1BGQavSA6r/" class="fb-xfbml-parse-ignore">
-                <a href="https://www.facebook.com/share/1BGQavSA6r/">Green Technology Club on Facebook</a>
+              <!-- Facebook replaces everything inside this block with the live
+                   plugin. If the plugin cannot load, this link is shown
+                   instead, so the box is never empty. -->
+              <blockquote cite="https://www.facebook.com/profile.php?id=61593214932057" class="fb-xfbml-parse-ignore">
+                <a class="btn btn-gtc-outline btn-sm" href="https://www.facebook.com/profile.php?id=61593214932057"
+                   target="_blank" rel="noopener">
+                  Open our Facebook page
+                </a>
               </blockquote>
             </div>
 
           </div>
-          <p class="gtc-note">
-            <strong>How this works:</strong> this is Facebook's own Page
-            Plugin. The Facebook SDK is loaded at the bottom of this page and
-            replaces the block above with a live view of our page, so the
-            posts shown come straight from Facebook rather than being copied
-            here by hand.
-          </p>
         </div>
 
         <!-- YouTube -->
-        <div class="col-lg-7">
-          <h3 class="h5 mb-3">Watch: green technology explained</h3>
+        <div class="col-lg-6">
+          <h3 class="h5 mb-3">
+            <i class="bi bi-youtube"></i> Watch: green technology explained
+          </h3>
 
           <div class="gtc-embed">
             <iframe src="https://www.youtube.com/embed/TCtIRAFyTIY"
-                    title="Green technology explained"
+                    title="What is green technology?"
                     loading="lazy"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
           </div>
 
-          <h3 class="h5 mt-4 mb-3">Find us elsewhere</h3>
+          <p class="gtc-note mt-3 mb-0">
+            <strong>How the Facebook panel works:</strong> it is Facebook's own
+            Page Plugin. The Facebook SDK is loaded at the bottom of this page
+            and swaps the block for a live view of our page, so the posts shown
+            come straight from Facebook rather than being copied here by hand.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Follow links sit on their own full-width row underneath -->
+      <div class="row mt-5">
+        <div class="col-12">
+          <h3 class="h5 mb-3">Find us elsewhere</h3>
           <div class="gtc-follow">
-            <a href="https://www.facebook.com/share/1BGQavSA6r/" target="_blank" rel="noopener">
+            <a href="https://www.facebook.com/profile.php?id=61593214932057" target="_blank" rel="noopener">
               <i class="bi bi-facebook"></i> Facebook
             </a>
             <a href="https://www.instagram.com/green_tech_club" target="_blank" rel="noopener">
@@ -442,10 +467,9 @@
             registered developer application, so it is listed as a link rather
             than an embedded plugin.
           </p>
-
         </div>
-
       </div>
+
     </div>
   </section>
 
@@ -635,7 +659,7 @@
         <h4>Follow us</h4>
         <p class="mb-0">Event reminders and project updates are posted here.</p>
         <div class="gtc-footer__social">
-          <a href="https://www.facebook.com/share/1BGQavSA6r/" target="_blank" rel="noopener" aria-label="Green Technology Club on Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=61593214932057" target="_blank" rel="noopener" aria-label="Green Technology Club on Facebook"><i class="bi bi-facebook"></i></a>
           <a href="https://www.instagram.com/green_tech_club" target="_blank" rel="noopener" aria-label="Green Technology Club on Instagram"><i class="bi bi-instagram"></i></a>
           <a href="https://www.youtube.com/@green_tech_club" target="_blank" rel="noopener" aria-label="Green Technology Club on YouTube"><i class="bi bi-youtube"></i></a>
         </div>
