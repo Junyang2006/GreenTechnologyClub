@@ -353,8 +353,23 @@ textarea:focus-visible {
    07. SECTION LAYOUT HELPERS
    ========================================================================== */
 .gtc-section {
+  position: relative;
   padding-top: var(--gtc-section-space);
   padding-bottom: var(--gtc-section-space);
+}
+
+/* Stops an over-wide element (an embedded plugin, a long unbroken link)
+   from pushing the whole page sideways on a phone. */
+body {
+  overflow-x: hidden;
+}
+
+/* Anything embedded from another site is kept inside its column. */
+iframe,
+.fb-page,
+.fb-page span,
+.fb-page iframe {
+  max-width: 100% !important;
 }
 
 .gtc-section--pale {
@@ -1687,14 +1702,66 @@ textarea:focus-visible {
   color: var(--gtc-leaf);
 }
 
+/* Storage comparison inside a card ----------------------------------------- */
+.gtc-compare {
+  margin: 1.25rem 0;
+}
+
+.gtc-compare__item {
+  border-left: 3px solid var(--gtc-leaf);
+  padding: 0.15rem 0 0.15rem 0.9rem;
+  margin-bottom: 1.1rem;
+}
+
+.gtc-compare__item:last-child {
+  margin-bottom: 0;
+}
+
+.gtc-compare__tag {
+  display: block;
+  font-family: var(--gtc-font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--gtc-green);
+  margin-bottom: 0.2rem;
+}
+
+.gtc-compare__item strong {
+  display: block;
+  color: var(--gtc-forest);
+  font-size: 0.97rem;
+  margin-bottom: 0.3rem;
+}
+
+.gtc-compare__item p {
+  font-size: 0.9rem;
+  color: var(--gtc-muted);
+  margin-bottom: 0;
+}
+
+
 /* Facebook plugin sits inside this box so the layout holds together even
-   before the club page exists. */
+   if the plugin cannot load. The minimum height stops the box collapsing
+   into a thin empty strip, and the fallback link is centred inside it. */
 .gtc-fb-box {
   border: 1px solid var(--gtc-line);
   border-radius: var(--gtc-radius);
   padding: 1rem;
   background-color: var(--gtc-white);
   overflow: hidden;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gtc-fb-box .fb-page {
+  max-width: 100%;
+}
+
+.gtc-fb-box blockquote {
+  margin: 0;
+  text-align: center;
 }
 
 
