@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- This site is designed for a light background only. Without this line a
+       phone browser with forced dark mode will invert all of our colours. -->
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="How smart cities use transport, energy, buildings, waste systems and IoT sensors, with a live air quality reading from a public REST API.">
+  <title>Smart Cities | Green Technology Club</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons (CSS only, no JavaScript) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Our own stylesheet, loaded last so it can override Bootstrap -->
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<a class="gtc-skip-link" href="#main-content">Skip to main content</a>
+
+
+<!-- ==========================================================================
+     NAVBAR  (identical on all six pages - only the "active" class moves)
+     ========================================================================== -->
+<nav class="navbar navbar-expand-lg gtc-navbar sticky-top" aria-label="Main navigation">
+  <div class="container">
+
+    <a class="navbar-brand" href="index.html">
+      <svg class="gtc-logo" viewBox="0 0 40 40" role="img" aria-label="Green Technology Club logo">
+        <path d="M20 35C8 29 6 14 20 5C34 14 32 29 20 35Z" fill="#E9F3EA" stroke="#2E7D32" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M20 34V9M20 24L12.5 19M20 17.5L27.5 12.5M20 29L26.5 24.5" stroke="#2E7D32" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="12.5" cy="19" r="2.2" fill="#F2A900"/>
+        <circle cx="27.5" cy="12.5" r="2.2" fill="#F2A900"/>
+        <circle cx="26.5" cy="24.5" r="2.2" fill="#F2A900"/>
+      </svg>
+      <span class="gtc-brand-text">
+        Green Technology Club
+        <small>Student Initiative</small>
+      </span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#gtcNavMenu" aria-controls="gtcNavMenu"
+            aria-expanded="false" aria-label="Toggle navigation menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="gtcNavMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="renewable.html">Renewable Energy</a></li>
+        <li class="nav-item"><a class="nav-link" href="ev.html">Electric Vehicles</a></li>
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="smart-city.html">Smart Cities</a></li>
+        <li class="nav-item"><a class="nav-link" href="events.html">Events</a></li>
+        <li class="nav-item ms-lg-3">
+          <a class="btn btn-gtc-accent" href="events.html#register">Join Us</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+<!-- ==========================================================================
+     WELCOME BAR  (only appears when a name is stored in a cookie)
+     ========================================================================== -->
+<div class="gtc-welcome" id="gtcWelcome" hidden>
+  <div class="container">
+    <div class="gtc-welcome__inner">
+      <p class="gtc-welcome__text" id="gtcWelcomeText"></p>
+      <button type="button" class="gtc-welcome__btn" id="gtcNameBtn" hidden>Add your name</button>
+      <button type="button" class="gtc-welcome__btn" id="gtcForgetBtn" hidden>Not you?</button>
+    </div>
+  </div>
+</div>
+
+
+<main id="main-content">
+
+  <!-- ========================================================================
+       PAGE HEADER
+       ======================================================================== -->
+  <header class="gtc-section gtc-section--dark">
+    <div class="container">
+      <div class="gtc-section-intro mb-0">
+        <p class="gtc-eyebrow gtc-animate-1">Smart cities</p>
+        <h1 class="gtc-animate-1">A city that measures itself can finally manage itself</h1>
+        <p class="gtc-animate-2 mt-3 mb-0">
+          A smart city is not a city full of screens. It is a city that
+          collects data about how it is actually being used &mdash; traffic,
+          electricity, water, waste, air &mdash; and adjusts itself based on
+          what that data says. This page covers the five systems where that
+          happens, and shows a live reading from a real environmental sensor
+          network.
+        </p>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ========================================================================
+       INTRODUCTION
+       ======================================================================== -->
+  <section class="gtc-section">
+    <div class="container">
+      <div class="row g-5">
+
+        <div class="col-lg-7">
+          <p class="gtc-eyebrow">Introduction</p>
+          <h2>What makes a city "smart"</h2>
+          <p class="mt-3">
+            Every city already makes decisions: when traffic lights change,
+            how often bins are emptied, how much power the grid supplies at
+            four in the afternoon. Traditionally those decisions run on fixed
+            schedules and rough estimates.
+          </p>
+          <p>
+            A smart city replaces the estimates with measurements. Sensors
+            report what is happening right now, software looks for patterns,
+            and the systems respond &mdash; lights stay green longer on the
+            busier road, the bin that is actually full gets collected first.
+          </p>
+          <p class="mb-0">
+            The environmental case is straightforward. Most waste in a city is
+            waste of effort: empty buses running full routes, lights burning
+            in empty rooms, trucks driving to bins that are half empty.
+            Measuring first is how that waste gets found.
+          </p>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="gtc-mini-card h-100">
+            <span class="gtc-mini-card__icon"><i class="bi bi-broadcast"></i></span>
+            <h3>Three layers, always</h3>
+            <p>
+              <strong>Sense</strong> &mdash; devices measure something real.
+            </p>
+            <p>
+              <strong>Understand</strong> &mdash; readings are collected and
+              analysed together.
+            </p>
+            <p class="mb-0">
+              <strong>Act</strong> &mdash; a system changes its behaviour, or a
+              person makes a better decision.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       LIVE AIR QUALITY  -  REST API called with jQuery $.get()
+       ======================================================================== -->
+  <section class="gtc-section gtc-section--pale">
+    <div class="container">
+
+      <div class="gtc-section-intro">
+        <p class="gtc-eyebrow">The sense layer, live</p>
+        <h2>Real sensor data, right now</h2>
+        <p>
+          Rather than only describing the sense layer, this section uses it.
+          The reading below is requested from the Open-Meteo Air Quality API
+          each time this page loads, for the coordinates of Kampar, Perak.
+          This is exactly the kind of feed a smart city dashboard is built on.
+        </p>
+      </div>
+
+      <div class="row g-4">
+
+        <div class="col-lg-7">
+          <div class="gtc-aqi" id="aqiPanel">
+
+            <div class="gtc-aqi__head">
+              <h3>Air quality &mdash; Kampar, Perak</h3>
+              <span class="gtc-aqi__status" id="aqiStatus">Loading...</span>
+            </div>
+
+            <!-- Error message, shown by jQuery if the request fails -->
+            <p class="gtc-aqi__error" id="aqiError" style="display: none;"></p>
+
+            <!-- Reading, shown once the request succeeds -->
+            <div id="aqiResult" style="display: none;">
+
+              <span class="gtc-aqi__band" id="aqiBand">&mdash;</span>
+
+              <div class="gtc-result-grid">
+                <div class="gtc-result-item gtc-result-item--highlight">
+                  <span>US AQI</span>
+                  <strong id="aqiValue">&mdash;</strong>
+                </div>
+                <div class="gtc-result-item">
+                  <span>PM2.5</span>
+                  <strong id="aqiPm25">&mdash;</strong>
+                </div>
+                <div class="gtc-result-item">
+                  <span>PM10</span>
+                  <strong id="aqiPm10">&mdash;</strong>
+                </div>
+              </div>
+
+              <p class="mt-3 mb-1" id="aqiAdvice"></p>
+              <p class="gtc-aqi__status mb-0">
+                Reading taken at <span id="aqiTime">&mdash;</span> local time
+              </p>
+
+            </div>
+
+            <button type="button" class="btn btn-gtc-primary btn-sm mt-3"
+                    id="aqiRefreshBtn">
+              <i class="bi bi-arrow-clockwise"></i> Refresh reading
+            </button>
+
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="gtc-mini-card h-100">
+            <span class="gtc-mini-card__icon"><i class="bi bi-cloud-arrow-down"></i></span>
+            <h3>How this reading gets here</h3>
+            <p>
+              The page sends a request to a public REST API using the jQuery
+              method <strong>$.get()</strong>. The server replies with JSON,
+              and jQuery writes the values into the page. No data is stored
+              and no account is needed.
+            </p>
+            <p>
+              PM2.5 is the measurement that matters most during a haze
+              episode. Those particles are small enough to travel deep into
+              the lungs, which is why they are tracked separately from the
+              larger PM10 dust.
+            </p>
+            <p class="mb-0">
+              Readings are supplied by Open-Meteo. If the service cannot be
+              reached, the panel shows a message instead of failing silently.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       FIVE SMART CITY DOMAINS  -  native CSS Grid layout
+       ======================================================================== -->
+  <section class="gtc-section">
+    <div class="container">
+
+      <div class="gtc-section-intro">
+        <p class="gtc-eyebrow">The systems</p>
+        <h2>Where a city becomes smart</h2>
+        <p>
+          Five systems carry most of the benefit. Each one follows the same
+          sense, understand, act pattern.
+        </p>
+      </div>
+
+      <!-- This grid is built with CSS Grid, not the Bootstrap grid -->
+      <div class="gtc-city-grid">
+
+        <div class="gtc-city-grid__item gtc-city-grid__item--wide">
+          <article class="gtc-city-card">
+            <span class="gtc-city-card__icon"><i class="bi bi-signpost-split"></i></span>
+            <h3>Smart Transportation</h3>
+            <p>
+              Sensors count vehicles and pedestrians, so traffic lights adapt
+              to the traffic that is actually there instead of a fixed timer.
+              Buses report their position, so passengers see a real arrival
+              time rather than a printed guess. Parking bays report whether
+              they are occupied, which removes the slow circling that causes a
+              surprising share of city-centre congestion.
+            </p>
+            <button type="button" class="btn btn-gtc-outline btn-sm"
+                    data-bs-toggle="modal" data-bs-target="#modalTransport">
+              Learn more
+            </button>
+          </article>
+        </div>
+
+        <div class="gtc-city-grid__item">
+          <article class="gtc-city-card">
+            <span class="gtc-city-card__icon"><i class="bi bi-lightning-charge"></i></span>
+            <h3>Smart Energy</h3>
+            <p>
+              Smart meters report consumption continuously, letting the grid
+              match supply to demand and letting households see what is
+              actually costing them money.
+            </p>
+            <button type="button" class="btn btn-gtc-outline btn-sm"
+                    data-bs-toggle="modal" data-bs-target="#modalEnergy">
+              Learn more
+            </button>
+          </article>
+        </div>
+
+        <div class="gtc-city-grid__item">
+          <article class="gtc-city-card">
+            <span class="gtc-city-card__icon"><i class="bi bi-building-gear"></i></span>
+            <h3>Smart Buildings</h3>
+            <p>
+              Occupancy and temperature sensors drive lighting and air
+              conditioning, which is where most of a tropical building's
+              electricity goes.
+            </p>
+            <button type="button" class="btn btn-gtc-outline btn-sm"
+                    data-bs-toggle="modal" data-bs-target="#modalBuildings">
+              Learn more
+            </button>
+          </article>
+        </div>
+
+        <div class="gtc-city-grid__item">
+          <article class="gtc-city-card">
+            <span class="gtc-city-card__icon"><i class="bi bi-trash3"></i></span>
+            <h3>Smart Waste Management</h3>
+            <p>
+              Fill-level sensors inside bins let collection routes be planned
+              around bins that are genuinely full, cutting truck mileage and
+              fuel.
+            </p>
+            <button type="button" class="btn btn-gtc-outline btn-sm"
+                    data-bs-toggle="modal" data-bs-target="#modalWaste">
+              Learn more
+            </button>
+          </article>
+        </div>
+
+        <div class="gtc-city-grid__item">
+          <article class="gtc-city-card">
+            <span class="gtc-city-card__icon"><i class="bi bi-cpu"></i></span>
+            <h3>IoT in Smart Cities</h3>
+            <p>
+              The Internet of Things is the layer underneath all of the above:
+              small, cheap, low-power devices that measure one thing and
+              report it over a network.
+            </p>
+            <button type="button" class="btn btn-gtc-outline btn-sm"
+                    data-bs-toggle="modal" data-bs-target="#modalIot">
+              Learn more
+            </button>
+          </article>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       BENEFITS
+       ======================================================================== -->
+  <section class="gtc-section gtc-section--offwhite">
+    <div class="container">
+
+      <div class="gtc-section-intro">
+        <p class="gtc-eyebrow">Benefits</p>
+        <h2>What a city actually gains</h2>
+        <p>
+          The benefits are practical rather than futuristic. Most of them come
+          from removing waste that nobody could previously see.
+        </p>
+      </div>
+
+      <div class="row g-4">
+
+        <div class="col-md-6 col-lg-4">
+          <div class="gtc-mini-card h-100">
+            <span class="gtc-mini-card__icon"><i class="bi bi-graph-down-arrow"></i></span>
+            <h3>Lower energy use</h3>
+            <p>
+              Lighting and cooling that respond to occupancy stop spending
+              electricity on empty rooms and empty streets.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="gtc-mini-card h-100">
+            <span class="gtc-mini-card__icon"><i class="bi bi-stopwatch"></i></span>
+            <h3>Less time in traffic</h3>
+            <p>
+              Adaptive signals and honest bus arrival times cut both idling
+              emissions and the amount of life spent commuting.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="gtc-mini-card h-100">
+            <span class="gtc-mini-card__icon"><i class="bi bi-truck"></i></span>
+            <h3>Fewer wasted journeys</h3>
+            <p>
+              Collection trucks, maintenance crews and delivery vehicles are
+              sent where they are needed rather than on a fixed loop.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="gtc-mini-card h-100">
+            <span class="gtc-mini-card__icon"><i class="bi bi-lungs"></i></span>
+            <h3>Better public health</h3>
+            <p>
+              Continuous air and water monitoring means a problem is noticed
+              in hours instead of at the next scheduled inspection.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="gtc-mini-card h-100">
+            <span class="gtc-mini-card__icon"><i class="bi bi-clipboard-data"></i></span>
+            <h3>Decisions with evidence</h3>
+            <p>
+              Planners can see how a road or a park is really used before
+              spending public money changing it.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="gtc-mini-card h-100">
+            <span class="gtc-mini-card__icon"><i class="bi bi-shield-exclamation"></i></span>
+            <h3>Faster emergency response</h3>
+            <p>
+              Flood sensors, fire detection and connected alerts shorten the
+              gap between something going wrong and someone knowing.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       QUESTIONS  (Bootstrap accordion)
+       ======================================================================== -->
+  <section class="gtc-section">
+    <div class="container">
+
+      <div class="gtc-section-intro">
+        <p class="gtc-eyebrow">Fair questions</p>
+        <h2>The concerns worth taking seriously</h2>
+        <p>
+          Smart city projects attract genuine criticism. Being able to answer
+          these is more useful than repeating the benefits.
+        </p>
+      </div>
+
+      <div class="accordion" id="smartCityAccordion">
+
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#question1" aria-expanded="true" aria-controls="question1">
+              Is this just surveillance with a friendlier name?
+            </button>
+          </h3>
+          <div id="question1" class="accordion-collapse collapse show"
+               data-bs-parent="#smartCityAccordion">
+            <div class="accordion-body">
+              It can be, and that depends entirely on design choices. A sensor
+              that counts how many vehicles passed is very different from a
+              camera that records who was driving them. Well-designed systems
+              collect the smallest amount of data that answers the question,
+              aggregate it immediately, and publish what is being collected.
+              Poorly designed systems collect everything and decide later.
+              The technology does not choose between these; the people
+              deploying it do.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#question2" aria-expanded="false" aria-controls="question2">
+              Does it only benefit people who are already connected?
+            </button>
+          </h3>
+          <div id="question2" class="accordion-collapse collapse"
+               data-bs-parent="#smartCityAccordion">
+            <div class="accordion-body">
+              This is a real risk. If the only way to find a bus, pay for
+              parking or report a fault is through an app, anyone without a
+              smartphone or reliable data is pushed further out. Systems that
+              work well keep a non-digital route open, and treat the app as
+              one option rather than the only one.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#question3" aria-expanded="false" aria-controls="question3">
+              Is the cost worth it?
+            </button>
+          </h3>
+          <div id="question3" class="accordion-collapse collapse"
+               data-bs-parent="#smartCityAccordion">
+            <div class="accordion-body">
+              Sensors are cheap; keeping them working for a decade is not.
+              Batteries need replacing, networks need maintaining and software
+              needs updating long after the launch event. Projects that
+              succeed are usually the narrow ones that fix a specific
+              measurable problem. Projects that fail are usually the broad
+              ones that install a great deal of equipment before deciding what
+              question it should answer.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#question4" aria-expanded="false" aria-controls="question4">
+              Does any of this apply to a campus?
+            </button>
+          </h3>
+          <div id="question4" class="accordion-collapse collapse"
+               data-bs-parent="#smartCityAccordion">
+            <div class="accordion-body">
+              A campus is a small city with the same problems: rooms cooled
+              while empty, lights left on overnight, bins collected on a fixed
+              schedule, and no clear picture of which buildings use the most
+              electricity. It is also a place where students can realistically
+              build and test something. That is the scale our club works at.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       CALL TO ACTION
+       ======================================================================== -->
+  <section class="gtc-section gtc-on-dark">
+    <div class="container">
+      <div class="gtc-cta">
+        <h2>Build something that measures</h2>
+        <p>
+          Our Sustainable Technology Challenge asks teams to pick one campus
+          problem and build a working way to measure it.
+        </p>
+        <a class="btn btn-gtc-accent" href="events.html">See upcoming events</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+<!-- ==========================================================================
+     MODALS  (opened by the "Learn more" buttons above)
+     ========================================================================== -->
+
+<div class="modal fade" id="modalTransport" tabindex="-1"
+     aria-labelledby="modalTransportLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title h5" id="modalTransportLabel">Smart Transportation</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h3 class="h6">What is measured</h3>
+        <p>
+          Induction loops buried in the road surface, roadside radar and
+          cameras count how many vehicles are waiting at each approach to a
+          junction. Buses report their own position continuously.
+        </p>
+        <h3 class="h6">What changes</h3>
+        <p>
+          Signal timing shifts towards whichever approach is actually busy,
+          instead of giving every direction the same fixed share. Arrival
+          boards show a calculated time rather than a timetable. Parking
+          guidance directs drivers to a bay that is known to be free.
+        </p>
+        <h3 class="h6">Why it is a green technology</h3>
+        <p class="mb-0">
+          A vehicle stopped in traffic is burning fuel and producing emissions
+          while travelling nowhere. Reducing idling time and removing the
+          circling that comes from searching for parking cuts both fuel use
+          and roadside air pollution without anyone changing vehicle.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-gtc-outline btn-sm" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalEnergy" tabindex="-1"
+     aria-labelledby="modalEnergyLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title h5" id="modalEnergyLabel">Smart Energy</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h3 class="h6">The problem it solves</h3>
+        <p>
+          Electricity has to be generated at the moment it is used. A
+          traditional grid handles this by keeping expensive spare capacity
+          running in case demand rises, which wastes fuel most of the time.
+        </p>
+        <h3 class="h6">What changes</h3>
+        <p>
+          Smart meters report consumption continuously instead of once a
+          month, so the grid sees demand as it happens. Supply can be matched
+          more closely, and pricing can encourage heavy use to move to times
+          when renewable output is high.
+        </p>
+        <h3 class="h6">The link to renewable energy</h3>
+        <p class="mb-0">
+          Solar output rises and falls with the weather. A grid that cannot
+          see demand in real time struggles to absorb that variation. This is
+          why smart energy systems and renewable generation tend to be built
+          together rather than separately.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-gtc-outline btn-sm" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalBuildings" tabindex="-1"
+     aria-labelledby="modalBuildingsLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title h5" id="modalBuildingsLabel">Smart Buildings</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h3 class="h6">Where the electricity goes</h3>
+        <p>
+          In a tropical climate, air conditioning is usually the single
+          largest electrical load in a building, followed by lighting. Both
+          are frequently running in spaces that nobody is using.
+        </p>
+        <h3 class="h6">What changes</h3>
+        <p>
+          Occupancy sensors, temperature sensors and daylight sensors let a
+          building management system cool and light a room only while it is
+          occupied, and dim artificial light when there is enough daylight.
+        </p>
+        <h3 class="h6">Why it is a good student project</h3>
+        <p class="mb-0">
+          The measurement side is achievable with inexpensive components, and
+          the result is easy to verify: compare the electricity used by one
+          room before and after. That makes it one of the few smart city
+          ideas a club can genuinely test.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-gtc-outline btn-sm" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalWaste" tabindex="-1"
+     aria-labelledby="modalWasteLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title h5" id="modalWasteLabel">Smart Waste Management</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h3 class="h6">The hidden waste</h3>
+        <p>
+          Collection routes are normally fixed. A truck drives the whole route
+          whether the bins are full or nearly empty, and a bin that overflows
+          early stays overflowing until its scheduled day.
+        </p>
+        <h3 class="h6">What changes</h3>
+        <p>
+          An ultrasonic sensor in the lid measures the distance to the top of
+          the rubbish and reports a fill level. Routes are then planned around
+          the bins that actually need emptying.
+        </p>
+        <h3 class="h6">The environmental gain</h3>
+        <p class="mb-0">
+          Collection vehicles are heavy and fuel-hungry, so removing
+          unnecessary stops cuts emissions directly. The same data also shows
+          which locations generate the most waste, which is where recycling
+          efforts are worth concentrating.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-gtc-outline btn-sm" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalIot" tabindex="-1"
+     aria-labelledby="modalIotLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title h5" id="modalIotLabel">IoT in Smart Cities</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h3 class="h6">What IoT means here</h3>
+        <p>
+          The Internet of Things describes small devices that are not
+          computers in the usual sense: they measure one thing, send it over a
+          network, and otherwise do very little. A bin sensor, a soil moisture
+          probe and a parking bay detector are all IoT devices.
+        </p>
+        <h3 class="h6">Why the constraints matter</h3>
+        <p>
+          These devices often run on a battery for years and sit somewhere
+          inconvenient to reach. That forces very low power use and very small
+          messages, which is why city networks use technologies designed for
+          long range and tiny amounts of data rather than ordinary Wi-Fi.
+        </p>
+        <h3 class="h6">Where the difficulty really is</h3>
+        <p class="mb-0">
+          Installing sensors is the easy part. Keeping thousands of them
+          powered, connected, updated and secure for a decade is the part that
+          decides whether a smart city project survives. An unpatched sensor
+          on a public network is also a security problem, not just a
+          maintenance one.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-gtc-outline btn-sm" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ==========================================================================
+     FOOTER  (identical on all six pages)
+     ========================================================================== -->
+<footer class="gtc-footer">
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-lg-4">
+        <div class="gtc-footer__brand">
+          <svg class="gtc-logo" viewBox="0 0 40 40" aria-hidden="true">
+            <path d="M20 35C8 29 6 14 20 5C34 14 32 29 20 35Z" fill="none" stroke="#66BB6A" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M20 34V9M20 24L12.5 19M20 17.5L27.5 12.5" stroke="#66BB6A" stroke-width="1.6" stroke-linecap="round"/>
+            <circle cx="12.5" cy="19" r="2.2" fill="#F2A900"/>
+            <circle cx="27.5" cy="12.5" r="2.2" fill="#F2A900"/>
+          </svg>
+          Green Technology Club
+        </div>
+        <p>
+          A proposed student club promoting renewable energy, electric
+          vehicles, smart cities and sustainable technology on campus.
+        </p>
+      </div>
+
+      <div class="col-6 col-lg-2">
+        <h4>Explore</h4>
+        <ul class="gtc-footer__list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="events.html">Events</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-lg-3">
+        <h4>Topics</h4>
+        <ul class="gtc-footer__list">
+          <li><a href="renewable.html">Renewable Energy</a></li>
+          <li><a href="ev.html">Electric Vehicles</a></li>
+          <li><a href="smart-city.html">Smart Cities</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-3">
+        <h4>Follow us</h4>
+        <p class="mb-0">Event reminders and project updates are posted here.</p>
+        <div class="gtc-footer__social">
+          <a href="https://www.facebook.com/share/1BGQavSA6r/" target="_blank" rel="noopener" aria-label="Green Technology Club on Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="https://www.instagram.com/green_tech_club" target="_blank" rel="noopener" aria-label="Green Technology Club on Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="https://www.youtube.com/@green_tech_club" target="_blank" rel="noopener" aria-label="Green Technology Club on YouTube"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="gtc-footer__bottom">
+      <div class="d-flex flex-wrap justify-content-between gap-2">
+        <p>&copy; <span id="footerYear">2026</span> Green Technology Club.</p>
+        <button type="button" class="gtc-footer__reset" id="cookieResetBtn">
+          Reset cookie preferences
+        </button>
+      </div>
+      <p class="gtc-disclaimer">
+        This website was created as a student coursework project. The club
+        described here is a proposal and is not an officially registered
+        organisation. Air quality readings are supplied by the Open-Meteo Air
+        Quality API.
+      </p>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ==========================================================================
+     COOKIE NOTICE  (identical on all six pages, hidden until needed)
+     ========================================================================== -->
+<div class="gtc-cookie-banner" id="cookieBanner" role="region" aria-label="Cookie notice" hidden>
+  <div class="container">
+    <div class="gtc-cookie-banner__inner">
+      <p class="gtc-cookie-banner__text">
+        <i class="bi bi-shield-check"></i>
+        This website uses cookies to improve your browsing experience and to
+        remember your preferences on your next visit.
+      </p>
+      <div class="gtc-cookie-banner__actions">
+        <button type="button" class="btn btn-gtc-accent" id="cookieAcceptBtn">Accept</button>
+        <button type="button" class="gtc-cookie-banner__dismiss" id="cookieDismissBtn">Not now</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Scripts: jQuery first, then Bootstrap, then our own file -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/script.js"></script>
+
+</body>
+</html>

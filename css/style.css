@@ -433,10 +433,14 @@ textarea:focus-visible {
   min-height: 78vh;
   padding: 5rem 0 3rem;
   background-color: var(--gtc-forest);
+  /* A dark, almost neutral wash sits over the photograph so the white
+     headline stays readable. It is deliberately not a strong green: a
+     heavy green overlay tints the photograph and it stops looking like a
+     photograph at all. */
   background-image:
-    linear-gradient(115deg, rgba(20, 83, 45, 0.94) 0%,
-                            rgba(20, 83, 45, 0.72) 55%,
-                            rgba(20, 83, 45, 0.45) 100%),
+    linear-gradient(105deg, rgba(8, 26, 16, 0.86) 0%,
+                            rgba(8, 26, 16, 0.62) 48%,
+                            rgba(8, 26, 16, 0.22) 100%),
     url("../images/hero-green-campus.jpg");
   background-size: cover;
   background-position: center;
@@ -544,14 +548,18 @@ textarea:focus-visible {
   width: 100%;
 }
 
-/* The media block uses a background image with a green gradient fallback,
-   so the layout still looks finished before the photos are added. */
+/* The media block shows a photograph. The green gradient below is only a
+   fallback for before the photographs are added: as soon as an image is
+   set on the element, that image replaces the gradient completely. No
+   colour is layered on top of the photograph, because a tint makes every
+   picture on the site look the same shade of green. */
 .gtc-card__media {
   height: 190px;
   background-color: var(--gtc-leaf);
   background-image: linear-gradient(140deg, var(--gtc-green), var(--gtc-leaf));
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
 }
 
 .gtc-card__body {
@@ -646,6 +654,7 @@ textarea:focus-visible {
   background-image: linear-gradient(150deg, var(--gtc-forest), var(--gtc-leaf));
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
 }
 
 .gtc-event__body {
@@ -1351,3 +1360,374 @@ textarea:focus-visible {
 
 
 /* --- MEMBER 3 STYLES START HERE --- */
+
+/* Smart city topic grid ----------------------------------------------------
+   This block uses native CSS Grid rather than the Bootstrap grid. Bootstrap 5
+   builds its rows and columns with Flexbox, so without this section the site
+   would never actually demonstrate CSS Grid.
+
+   grid-template-columns: repeat(3, 1fr) creates three equal columns, and the
+   first card is told to span two of them, which is something Flexbox cannot
+   do cleanly.
+   -------------------------------------------------------------------------- */
+.gtc-city-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.gtc-city-grid__item--wide {
+  grid-column: span 2;
+}
+
+.gtc-city-card {
+  height: 100%;
+  background-color: var(--gtc-white);
+  border: 1px solid var(--gtc-line);
+  border-radius: var(--gtc-radius);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease,
+              border-color 0.25s ease;
+}
+
+.gtc-city-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--gtc-leaf);
+  box-shadow: var(--gtc-shadow-lg);
+}
+
+.gtc-city-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background-color: var(--gtc-pale);
+  color: var(--gtc-green);
+  font-size: 1.4rem;
+  margin-bottom: 1.1rem;
+}
+
+.gtc-city-card h3 {
+  font-size: 1.12rem;
+  margin-bottom: 0.55rem;
+}
+
+.gtc-city-card p {
+  color: var(--gtc-muted);
+  font-size: 0.95rem;
+  flex-grow: 1;
+}
+
+.gtc-city-card .btn {
+  align-self: flex-start;
+  margin-top: 0.75rem;
+}
+
+/* Two columns on tablets, one column on phones. */
+@media (max-width: 991.98px) {
+  .gtc-city-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gtc-city-grid__item--wide {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .gtc-city-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .gtc-city-grid__item--wide {
+    grid-column: span 1;
+  }
+}
+
+
+/* Live air quality panel (REST API) ---------------------------------------- */
+.gtc-aqi {
+  background-color: var(--gtc-white);
+  border: 1px solid var(--gtc-line);
+  border-radius: var(--gtc-radius);
+  padding: 2rem;
+  box-shadow: var(--gtc-shadow);
+}
+
+.gtc-aqi__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.gtc-aqi__head h3 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.gtc-aqi__status {
+  font-family: var(--gtc-font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gtc-muted);
+}
+
+.gtc-aqi__band {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  font-weight: 700;
+  font-size: 0.88rem;
+  margin-bottom: 1.1rem;
+  background-color: var(--gtc-pale);
+  color: var(--gtc-forest);
+}
+
+/* Colour states set by JavaScript once the reading arrives. */
+.gtc-aqi__band--good      { background-color: #DDF3DE; color: #1B5E20; }
+.gtc-aqi__band--moderate  { background-color: #FDF0CE; color: #7A5600; }
+.gtc-aqi__band--sensitive { background-color: #FBE3D0; color: #8A3D00; }
+.gtc-aqi__band--unhealthy { background-color: #F8D7DA; color: #8A1C24; }
+.gtc-aqi__band--severe    { background-color: #E7D6F0; color: #4A1D63; }
+
+.gtc-aqi__error {
+  background-color: #FDF0EF;
+  border-left: 3px solid #C62828;
+  border-radius: 0 var(--gtc-radius-sm) var(--gtc-radius-sm) 0;
+  padding: 0.9rem 1rem;
+  font-size: 0.9rem;
+  color: #7A1F1F;
+}
+
+
+/* Event cards -------------------------------------------------------------- */
+.gtc-event-card {
+  height: 100%;
+  background-color: var(--gtc-white);
+  border: 1px solid var(--gtc-line);
+  border-radius: var(--gtc-radius);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.gtc-event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--gtc-shadow-lg);
+}
+
+.gtc-event-card h3 {
+  font-size: 1.15rem;
+  margin: 0.6rem 0;
+}
+
+.gtc-event-card__meta {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 1rem;
+}
+
+.gtc-event-card__meta li {
+  display: flex;
+  gap: 0.55rem;
+  align-items: flex-start;
+  font-size: 0.9rem;
+  color: var(--gtc-muted);
+  padding: 0.2rem 0;
+}
+
+.gtc-event-card__meta i {
+  color: var(--gtc-green);
+  margin-top: 0.2rem;
+}
+
+.gtc-event-card p {
+  color: var(--gtc-muted);
+  font-size: 0.94rem;
+  flex-grow: 1;
+}
+
+.gtc-event-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+
+/* Session storage panel ---------------------------------------------------- */
+.gtc-session {
+  background-color: var(--gtc-pale);
+  border-radius: var(--gtc-radius);
+  padding: 1.25rem 1.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.gtc-session h3 {
+  font-size: 0.78rem;
+  font-family: var(--gtc-font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gtc-green);
+  margin-bottom: 0.75rem;
+}
+
+.gtc-session__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.75rem;
+  font-size: 0.9rem;
+  color: var(--gtc-forest);
+  padding: 0.15rem 0;
+}
+
+.gtc-session__row span {
+  color: var(--gtc-muted);
+  min-width: 130px;
+}
+
+.gtc-session__row strong {
+  font-weight: 700;
+}
+
+
+/* Share links -------------------------------------------------------------- */
+.gtc-share-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+}
+
+.gtc-share-list a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border: 1px solid var(--gtc-line);
+  border-radius: var(--gtc-radius-sm);
+  padding: 0.5rem 0.9rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--gtc-forest);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.gtc-share-list a:hover {
+  background-color: var(--gtc-pale);
+  border-color: var(--gtc-leaf);
+  text-decoration: none;
+}
+
+.gtc-share-list i {
+  color: var(--gtc-green);
+}
+
+/* Shows the encoded link so the encoding is visible during the demo. */
+.gtc-encoded {
+  display: block;
+  font-family: var(--gtc-font-mono);
+  font-size: 0.76rem;
+  line-height: 1.6;
+  color: var(--gtc-muted);
+  background-color: var(--gtc-off-white);
+  border: 1px solid var(--gtc-line);
+  border-radius: var(--gtc-radius-sm);
+  padding: 0.75rem 0.9rem;
+  word-break: break-all;
+}
+
+
+/* Responsive video and social embeds --------------------------------------- */
+.gtc-embed {
+  position: relative;
+  padding-bottom: 56.25%;   /* 16:9 ratio */
+  height: 0;
+  overflow: hidden;
+  border-radius: var(--gtc-radius);
+  background-color: var(--gtc-pale);
+}
+
+.gtc-embed iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.gtc-embed-note {
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.5rem;
+  background-color: var(--gtc-off-white);
+  border: 1px dashed var(--gtc-line);
+  border-radius: var(--gtc-radius);
+  padding: 1.5rem;
+  color: var(--gtc-muted);
+  font-size: 0.9rem;
+}
+
+.gtc-embed-note i {
+  font-size: 1.6rem;
+  color: var(--gtc-leaf);
+}
+
+/* Facebook plugin sits inside this box so the layout holds together even
+   before the club page exists. */
+.gtc-fb-box {
+  border: 1px solid var(--gtc-line);
+  border-radius: var(--gtc-radius);
+  padding: 1rem;
+  background-color: var(--gtc-white);
+  overflow: hidden;
+}
+
+
+/* Follow links ------------------------------------------------------------- */
+.gtc-follow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.gtc-follow a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--gtc-line);
+  border-radius: var(--gtc-radius-sm);
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--gtc-forest);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.gtc-follow a:hover {
+  background-color: var(--gtc-pale);
+  border-color: var(--gtc-leaf);
+  text-decoration: none;
+}
+
+@media (max-width: 575.98px) {
+  .gtc-aqi,
+  .gtc-city-card,
+  .gtc-event-card {
+    padding: 1.35rem;
+  }
+}

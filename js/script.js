@@ -693,6 +693,434 @@ function showEvShortlist() {
 
 /* --- MEMBER 3 CODE STARTS HERE --- */
 
+/* ==========================================================================
+   REST API - smart-city.html
+   Open-Meteo Air Quality API.
+
+   What it is    : a free public REST API that returns current air quality
+                   readings for a set of coordinates.
+   Why this one  : a smart city runs on sensor data, so showing a live
+                   environmental reading demonstrates the data layer of a
+                   smart city rather than just describing it. The
+                   coordinates below are Kampar, Perak.
+   Why it suits  : no API key, no sign-up, no backend, and the server allows
+   a student site   browser requests, so jQuery can call it directly.
+   What it returns: JSON containing a "current" object with pm10, pm2_5 and
+                   us_aqi values plus the time of the reading.
+   ========================================================================== */
+
+var KAMPAR_LATITUDE = 4.3167;
+var KAMPAR_LONGITUDE = 101.1500;
+
+
+function setUpAirQuality() {
+  if ($("#aqiPanel").length === 0) {
+    return;
+  }
+
+  loadAirQuality();
+
+  $("#aqiRefreshBtn").on("click", function () {
+    loadAirQuality();
+  });
+}
+
+
+function loadAirQuality() {
+  // encodeURIComponent() is required here. The timezone value contains a
+  // "/" character, which has a special meaning inside a URL, so it has to
+  // be turned into %2F before it is sent.
+  var apiUrl = "https://air-quality-api.open-meteo.com/v1/air-quality"
+             + "?latitude=" + KAMPAR_LATITUDE
+             + "&longitude=" + KAMPAR_LONGITUDE
+             + "&current=" + encodeURIComponent("pm10,pm2_5,us_aqi")
+             + "&timezone=" + encodeURIComponent("Asia/Singapore");
+
+  $("#aqiStatus").text("Loading...");
+  $("#aqiError").hide();
+
+  // jQuery $.get() sends the request. The function inside runs when the
+  // reply arrives; .fail() runs instead if the request does not succeed.
+  $.get(apiUrl, function (data) {
+    showAirQuality(data);
+  }).fail(function () {
+    $("#aqiStatus").text("Unavailable");
+    $("#aqiResult").hide();
+    $("#aqiError")
+      .text("The air quality service could not be reached. " +
+            "Please check your internet connection and try again.")
+      .show();
+  });
+}
+
+
+function showAirQuality(data) {
+  // Guard against a reply that arrives but has no reading inside it.
+  if (!data || !data.current) {
+    $("#aqiStatus").text("No data");
+    $("#aqiError")
+      .text("The service replied but did not include a reading for this location.")
+      .show();
+    return;
+  }
+
+  var reading = data.current;
+  var aqi = reading.us_aqi;
+
+  // Write the values into the page using jQuery.
+  $("#aqiValue").text(aqi);
+  $("#aqiPm25").text(reading.pm2_5 + " ug/m3");
+  $("#aqiPm10").text(reading.pm10 + " ug/m3");
+  $("#aqiTime").text(reading.time.replace("T", " "));
+  $("#aqiStatus").text("Live reading");
+
+  // Turn the number into a category using the US AQI bands.
+  var band = describeAqi(aqi);
+  $("#aqiBand")
+    .text(band.label)
+    .removeClass("gtc-aqi__band--good gtc-aqi__band--moderate " +
+                 "gtc-aqi__band--sensitive gtc-aqi__band--unhealthy " +
+                 "gtc-aqi__band--severe")
+    .addClass(band.cssClass);
+
+  $("#aqiAdvice").text(band.advice);
+  $("#aqiResult").show();
+}
+
+
+/* Converts a US AQI number into a category and a short piece of advice. */
+function describeAqi(aqi) {
+  if (aqi <= 50) {
+    return {
+      label: "Good",
+      cssClass: "gtc-aqi__band--good",
+      advice: "Air quality is satisfactory and outdoor activity carries little risk."
+    };
+  }
+
+  if (aqi <= 100) {
+    return {
+      label: "Moderate",
+      cssClass: "gtc-aqi__band--moderate",
+      advice: "Acceptable for most people, though unusually sensitive individuals may notice it."
+    };
+  }
+
+  if (aqi <= 150) {
+    return {
+      label: "Unhealthy for sensitive groups",
+      cssClass: "gtc-aqi__band--sensitive",
+      advice: "People with asthma or heart conditions should limit long periods outdoors."
+    };
+  }
+
+  if (aqi <= 200) {
+    return {
+      label: "Unhealthy",
+      cssClass: "gtc-aqi__band--unhealthy",
+      advice: "Everyone may begin to feel effects. Reduce prolonged outdoor exertion."
+    };
+  }
+
+  return {
+    label: "Very unhealthy or worse",
+    cssClass: "gtc-aqi__band--severe",
+    advice: "Avoid outdoor activity where possible and keep windows closed."
+  };
+}
+
+
+/* ==========================================================================
+   SESSION STORAGE - events.html
+
+   Two things are kept for the current browser tab only:
+
+     gtcSelectedEvent  the event chosen from a card, used to pre-select the
+                       dropdown when the visitor reaches the form
+     gtcFormDraft      whatever has been typed into the form so far
+
+   Why sessionStorage and not localStorage:
+   the draft holds a real name and email address. localStorage would keep
+   that on the device after the browser closes, which is a privacy problem
+   on a shared computer such as one in a library. sessionStorage clears
+   itself the moment the tab is closed, so the data cannot be left behind.
+   ========================================================================== */
+
+var SESSION_KEY_SELECTED = "gtcSelectedEvent";
+var SESSION_KEY_DRAFT = "gtcFormDraft";
+
+
+function setUpEventsPage() {
+  if ($("#registrationForm").length === 0) {
+    return;
+  }
+
+  restoreSelectedEvent();
+  restoreFormDraft();
+  showRegistrations();
+
+  // Clicking "Register" on an event card stores the event name for this tab
+  // and moves the visitor down to the form.
+  $(".gtc-register-btn").on("click", function () {
+    var eventName = $(this).data("event");
+
+    sessionStorage.setItem(SESSION_KEY_SELECTED, eventName);
+    $("#regEvent").val(eventName);
+    saveFormDraft();
+    showSessionPanel();
+  });
+
+  // Every keystroke and dropdown change updates the draft.
+  $("#regName, #regEmail, #regEvent").on("input change", function () {
+    saveFormDraft();
+  });
+
+  // event.preventDefault() stops the browser from reloading the page, which
+  // is what a form normally does when it is submitted.
+  $("#registrationForm").on("submit", function (event) {
+    event.preventDefault();
+    handleRegistration();
+  });
+
+  $("#regClearDraftBtn").on("click", function () {
+    sessionStorage.removeItem(SESSION_KEY_DRAFT);
+    sessionStorage.removeItem(SESSION_KEY_SELECTED);
+    $("#registrationForm")[0].reset();
+    showSessionPanel();
+  });
+
+  $("#regClearAllBtn").on("click", function () {
+    if (confirm("Delete every registration saved in this browser?")) {
+      clearRegistrations();
+      showRegistrations();
+    }
+  });
+}
+
+
+/* Writes the current contents of the form into sessionStorage. */
+function saveFormDraft() {
+  var draft = {
+    name: $("#regName").val(),
+    email: $("#regEmail").val(),
+    event: $("#regEvent").val(),
+    savedAt: new Date().toLocaleTimeString()
+  };
+
+  sessionStorage.setItem(SESSION_KEY_DRAFT, JSON.stringify(draft));
+  showSessionPanel();
+}
+
+
+/* Puts a saved draft back into the form when the visitor returns. */
+function restoreFormDraft() {
+  var savedText = sessionStorage.getItem(SESSION_KEY_DRAFT);
+
+  if (savedText === null) {
+    showSessionPanel();
+    return;
+  }
+
+  var draft;
+
+  try {
+    draft = JSON.parse(savedText);
+  } catch (error) {
+    showSessionPanel();
+    return;
+  }
+
+  $("#regName").val(draft.name);
+  $("#regEmail").val(draft.email);
+
+  if (draft.event) {
+    $("#regEvent").val(draft.event);
+  }
+
+  showSessionPanel();
+}
+
+
+/* Applies an event chosen on a card before the page was reloaded. */
+function restoreSelectedEvent() {
+  var selected = sessionStorage.getItem(SESSION_KEY_SELECTED);
+
+  if (selected !== null) {
+    $("#regEvent").val(selected);
+  }
+}
+
+
+/* Shows what is currently held in sessionStorage, so the feature can be
+   demonstrated without opening the browser developer tools. */
+function showSessionPanel() {
+  var selected = sessionStorage.getItem(SESSION_KEY_SELECTED);
+  var savedText = sessionStorage.getItem(SESSION_KEY_DRAFT);
+
+  $("#sessionSelected").text(selected === null ? "none yet" : selected);
+
+  if (savedText === null) {
+    $("#sessionDraft").text("nothing saved");
+    return;
+  }
+
+  try {
+    var draft = JSON.parse(savedText);
+    var typed = draft.name || draft.email ? "yes" : "empty";
+    $("#sessionDraft").text(typed + " (last saved " + draft.savedAt + ")");
+  } catch (error) {
+    $("#sessionDraft").text("nothing saved");
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   Registration
+   The storage functions used here were written by Member 2 and are shared
+   with the other pages, so the storage logic exists in one place only.
+   -------------------------------------------------------------------------- */
+function handleRegistration() {
+  var name = $("#regName").val().trim();
+  var email = $("#regEmail").val().trim();
+  var eventName = $("#regEvent").val();
+
+  var $message = $("#regMessage");
+  $message.hide();
+
+  if (name === "") {
+    $message.text("Please enter your name.").show();
+    return;
+  }
+
+  // A simple check: an address needs an "@" with text on both sides.
+  if (email.indexOf("@") < 1 || email.indexOf("@") === email.length - 1) {
+    $message.text("Please enter a valid email address.").show();
+    return;
+  }
+
+  if (eventName === "") {
+    $message.text("Please choose an event.").show();
+    return;
+  }
+
+  // localStorage, through Member 2's shared function.
+  saveRegistration(name, email, eventName);
+
+  // The draft has served its purpose, so it is cleared from sessionStorage.
+  sessionStorage.removeItem(SESSION_KEY_DRAFT);
+  sessionStorage.removeItem(SESSION_KEY_SELECTED);
+
+  $("#registrationForm")[0].reset();
+  showSessionPanel();
+  showRegistrations();
+
+  $message
+    .text("Thank you " + name + ". Your place at " + eventName +
+          " has been saved in this browser.")
+    .show();
+}
+
+
+/* Draws the list of saved registrations. */
+function showRegistrations() {
+  var list = getRegistrations();
+  var $listBox = $("#regList");
+
+  if ($listBox.length === 0) {
+    return;
+  }
+
+  $listBox.empty();
+
+  if (list.length === 0) {
+    $listBox.append(
+      '<li><p class="gtc-empty">No registrations saved yet.</p></li>'
+    );
+    $("#regClearAllBtn").hide();
+    return;
+  }
+
+  $("#regClearAllBtn").show();
+
+  for (var i = 0; i < list.length; i++) {
+    var item = list[i];
+
+    $listBox.append(
+      '<li class="gtc-saved-item">' +
+        '<span class="gtc-saved-item__main">' +
+          '<strong>' + item.event + '</strong>' +
+          '<small>' + item.name + ' &middot; ' + item.email +
+          ' &middot; saved ' + item.savedOn + '</small>' +
+        '</span>' +
+        '<button type="button" class="gtc-remove-btn" ' +
+                'data-index="' + i + '" aria-label="Remove this registration">' +
+          'Remove' +
+        '</button>' +
+      '</li>'
+    );
+  }
+
+  $listBox.find(".gtc-remove-btn").on("click", function () {
+    var index = parseInt($(this).data("index"), 10);
+    removeRegistration(index);
+    showRegistrations();
+  });
+}
+
+
+/* ==========================================================================
+   SHARE LINKS - events.html
+
+   These are built by hand rather than loaded from a sharing service, so no
+   extra library is needed and nothing tracks the visitor.
+
+   Every social network expects the link and the message as URL parameters.
+   encodeURIComponent() converts characters that have a special meaning in a
+   URL into safe codes: a space becomes %20, ":" becomes %3A and "/" becomes
+   %2F. Without it a message containing "&" would cut the link in half.
+   ========================================================================== */
+
+function setUpShareButtons() {
+  if ($("#shareModal").length === 0) {
+    return;
+  }
+
+  $(".gtc-share-btn").on("click", function () {
+    var eventName = $(this).data("event");
+    buildShareLinks(eventName);
+  });
+}
+
+
+function buildShareLinks(eventName) {
+  // Strip any "#section" from the end of the current address.
+  var pageUrl = window.location.href.split("#")[0];
+  var message = "Join me at " + eventName + " - Green Technology Club";
+
+  var encodedUrl = encodeURIComponent(pageUrl);
+  var encodedMessage = encodeURIComponent(message);
+
+  $("#shareFacebook").attr("href",
+    "https://www.facebook.com/sharer/sharer.php?u=" + encodedUrl);
+
+  $("#shareX").attr("href",
+    "https://twitter.com/intent/tweet?text=" + encodedMessage +
+    "&url=" + encodedUrl);
+
+  $("#shareWhatsapp").attr("href",
+    "https://wa.me/?text=" + encodeURIComponent(message + " " + pageUrl));
+
+  $("#shareTelegram").attr("href",
+    "https://t.me/share/url?url=" + encodedUrl +
+    "&text=" + encodedMessage);
+
+  $("#shareModalLabel").text("Share this event");
+  $("#shareEventName").text(eventName);
+
+  // Showing the encoded text makes the effect of encodeURIComponent visible.
+  $("#shareEncoded").text(encodedMessage);
+}
+
 
 /* ==========================================================================
    START EVERYTHING
@@ -711,4 +1139,9 @@ document.addEventListener("DOMContentLoaded", function () {
   setUpSolarCalculator();
   setUpEvCalculator();
   setUpEvShortlist();
+
+  // Member 3 - session storage, REST API and social sharing
+  setUpAirQuality();
+  setUpEventsPage();
+  setUpShareButtons();
 });

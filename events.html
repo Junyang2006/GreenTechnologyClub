@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- This site is designed for a light background only. Without this line a
+       phone browser with forced dark mode will invert all of our colours. -->
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Upcoming Green Technology Club events, online registration, and how to follow or join the club.">
+  <title>Events &amp; Join Us | Green Technology Club</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons (CSS only, no JavaScript) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Our own stylesheet, loaded last so it can override Bootstrap -->
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<a class="gtc-skip-link" href="#main-content">Skip to main content</a>
+
+
+<!-- ==========================================================================
+     NAVBAR  (identical on all six pages - only the "active" class moves)
+     ========================================================================== -->
+<nav class="navbar navbar-expand-lg gtc-navbar sticky-top" aria-label="Main navigation">
+  <div class="container">
+
+    <a class="navbar-brand" href="index.html">
+      <svg class="gtc-logo" viewBox="0 0 40 40" role="img" aria-label="Green Technology Club logo">
+        <path d="M20 35C8 29 6 14 20 5C34 14 32 29 20 35Z" fill="#E9F3EA" stroke="#2E7D32" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M20 34V9M20 24L12.5 19M20 17.5L27.5 12.5M20 29L26.5 24.5" stroke="#2E7D32" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="12.5" cy="19" r="2.2" fill="#F2A900"/>
+        <circle cx="27.5" cy="12.5" r="2.2" fill="#F2A900"/>
+        <circle cx="26.5" cy="24.5" r="2.2" fill="#F2A900"/>
+      </svg>
+      <span class="gtc-brand-text">
+        Green Technology Club
+        <small>Student Initiative</small>
+      </span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#gtcNavMenu" aria-controls="gtcNavMenu"
+            aria-expanded="false" aria-label="Toggle navigation menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="gtcNavMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="renewable.html">Renewable Energy</a></li>
+        <li class="nav-item"><a class="nav-link" href="ev.html">Electric Vehicles</a></li>
+        <li class="nav-item"><a class="nav-link" href="smart-city.html">Smart Cities</a></li>
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="events.html">Events</a></li>
+        <li class="nav-item ms-lg-3">
+          <a class="btn btn-gtc-accent" href="events.html#register">Join Us</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+<!-- ==========================================================================
+     WELCOME BAR  (only appears when a name is stored in a cookie)
+     ========================================================================== -->
+<div class="gtc-welcome" id="gtcWelcome" hidden>
+  <div class="container">
+    <div class="gtc-welcome__inner">
+      <p class="gtc-welcome__text" id="gtcWelcomeText"></p>
+      <button type="button" class="gtc-welcome__btn" id="gtcNameBtn" hidden>Add your name</button>
+      <button type="button" class="gtc-welcome__btn" id="gtcForgetBtn" hidden>Not you?</button>
+    </div>
+  </div>
+</div>
+
+
+<main id="main-content">
+
+  <!-- ========================================================================
+       PAGE HEADER
+       ======================================================================== -->
+  <header class="gtc-section gtc-section--dark">
+    <div class="container">
+      <div class="gtc-section-intro mb-0">
+        <p class="gtc-eyebrow gtc-animate-1">Events and membership</p>
+        <h1 class="gtc-animate-1">Come to one session before you decide anything</h1>
+        <p class="gtc-animate-2 mt-3 mb-0">
+          Every event below is open to students from any programme and any
+          year, and none of them assume you already know the topic. Register
+          for whichever one sounds interesting &mdash; that is also how you
+          join the club.
+        </p>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ========================================================================
+       UPCOMING EVENTS
+       ======================================================================== -->
+  <section class="gtc-section">
+    <div class="container">
+
+      <div class="gtc-section-intro">
+        <p class="gtc-eyebrow">What's on</p>
+        <h2>Upcoming green technology events</h2>
+        <p>
+          Select <strong>Register</strong> on any event and the form further
+          down this page will already have it selected for you.
+        </p>
+      </div>
+
+      <div class="row g-4">
+
+        <!-- Event 1 - this must stay identical to the featured event on index.html -->
+        <div class="col-md-6">
+          <article class="gtc-event-card">
+            <span class="gtc-badge">Workshop</span>
+            <h3>Green Technology Workshop 2026</h3>
+            <ul class="gtc-event-card__meta">
+              <li><i class="bi bi-calendar-event"></i> 10 October 2026</li>
+              <li><i class="bi bi-clock"></i> 2:00 PM &ndash; 5:00 PM</li>
+              <li><i class="bi bi-geo-alt"></i> Multipurpose Hall, UTAR Kampar Campus</li>
+            </ul>
+            <p>
+              A beginner-friendly introduction to the technologies behind
+              renewable energy and sustainable design. Bring a laptop; no
+              prior knowledge is assumed.
+            </p>
+            <div class="gtc-event-card__actions">
+              <button type="button" class="btn btn-gtc-primary btn-sm gtc-register-btn"
+                      data-event="Green Technology Workshop 2026">
+                Register
+              </button>
+              <button type="button" class="btn btn-gtc-outline btn-sm gtc-share-btn"
+                      data-event="Green Technology Workshop 2026"
+                      data-bs-toggle="modal" data-bs-target="#shareModal">
+                <i class="bi bi-share"></i> Share
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <!-- Event 2 -->
+        <div class="col-md-6">
+          <article class="gtc-event-card">
+            <span class="gtc-badge">Seminar</span>
+            <h3>Renewable Energy Seminar</h3>
+            <ul class="gtc-event-card__meta">
+              <li><i class="bi bi-calendar-event"></i> 24 October 2026</li>
+              <li><i class="bi bi-clock"></i> 10:00 AM &ndash; 12:30 PM</li>
+              <li><i class="bi bi-geo-alt"></i> LDK3 (Block L), UTAR Kampar Campus</li>
+            </ul>
+            <p>
+              How solar, wind and hydro systems are sized, costed and
+              connected to the grid in practice &mdash; including the parts
+              that usually go wrong.
+            </p>
+            <div class="gtc-event-card__actions">
+              <button type="button" class="btn btn-gtc-primary btn-sm gtc-register-btn"
+                      data-event="Renewable Energy Seminar">
+                Register
+              </button>
+              <button type="button" class="btn btn-gtc-outline btn-sm gtc-share-btn"
+                      data-event="Renewable Energy Seminar"
+                      data-bs-toggle="modal" data-bs-target="#shareModal">
+                <i class="bi bi-share"></i> Share
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <!-- Event 3 -->
+        <div class="col-md-6">
+          <article class="gtc-event-card">
+            <span class="gtc-badge">Exhibition</span>
+            <h3>Electric Vehicle Exhibition</h3>
+            <ul class="gtc-event-card__meta">
+              <li><i class="bi bi-calendar-event"></i> 14 November 2026</li>
+              <li><i class="bi bi-clock"></i> 9:00 AM &ndash; 4:00 PM</li>
+              <li><i class="bi bi-geo-alt"></i> Faculty of Business and Finance Open Car Park, UTAR Kampar Campus</li>
+            </ul>
+            <p>
+              Owners bring their vehicles onto campus so you can ask the
+              questions a specification sheet cannot answer, including what
+              charging is really like day to day.
+            </p>
+            <div class="gtc-event-card__actions">
+              <button type="button" class="btn btn-gtc-primary btn-sm gtc-register-btn"
+                      data-event="Electric Vehicle Exhibition">
+                Register
+              </button>
+              <button type="button" class="btn btn-gtc-outline btn-sm gtc-share-btn"
+                      data-event="Electric Vehicle Exhibition"
+                      data-bs-toggle="modal" data-bs-target="#shareModal">
+                <i class="bi bi-share"></i> Share
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <!-- Event 4 -->
+        <div class="col-md-6">
+          <article class="gtc-event-card">
+            <span class="gtc-badge">Challenge</span>
+            <h3>Sustainable Technology Challenge</h3>
+            <ul class="gtc-event-card__meta">
+              <li><i class="bi bi-calendar-event"></i> 5 December 2026</li>
+              <li><i class="bi bi-clock"></i> 9:00 AM &ndash; 6:00 PM</li>
+              <li><i class="bi bi-geo-alt"></i> Block E, E104, UTAR Kampar Campus</li>
+            </ul>
+            <p>
+              Teams pick one campus sustainability problem and build a working
+              way to measure it in a single day. Open to all skill levels;
+              teams are formed on the morning.
+            </p>
+            <div class="gtc-event-card__actions">
+              <button type="button" class="btn btn-gtc-primary btn-sm gtc-register-btn"
+                      data-event="Sustainable Technology Challenge">
+                Register
+              </button>
+              <button type="button" class="btn btn-gtc-outline btn-sm gtc-share-btn"
+                      data-event="Sustainable Technology Challenge"
+                      data-bs-toggle="modal" data-bs-target="#shareModal">
+                <i class="bi bi-share"></i> Share
+              </button>
+            </div>
+          </article>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       REGISTRATION FORM
+       sessionStorage (draft + selected event) and localStorage (saved list)
+       ======================================================================== -->
+  <section class="gtc-section gtc-section--offwhite" id="register">
+    <div class="container">
+
+      <div class="gtc-section-intro">
+        <p class="gtc-eyebrow">Register</p>
+        <h2>Reserve your place</h2>
+        <p>
+          Fill in the form below. Everything you type is kept temporarily in
+          this browser tab, so if you navigate away and come back your details
+          are still here.
+        </p>
+      </div>
+
+      <div class="row g-4">
+
+        <div class="col-lg-7">
+          <div class="gtc-calc">
+
+            <!-- Live view of what is currently in sessionStorage -->
+            <div class="gtc-session">
+              <h3>Session storage right now</h3>
+              <p class="gtc-session__row">
+                <span>Selected event:</span>
+                <strong id="sessionSelected">none yet</strong>
+              </p>
+              <p class="gtc-session__row mb-0">
+                <span>Form draft:</span>
+                <strong id="sessionDraft">nothing saved</strong>
+              </p>
+            </div>
+
+            <form id="registrationForm" novalidate>
+              <div class="row g-3">
+
+                <div class="col-sm-6">
+                  <label for="regName" class="form-label">Full name</label>
+                  <input type="text" class="form-control" id="regName"
+                         placeholder="Your name" autocomplete="name">
+                </div>
+
+                <div class="col-sm-6">
+                  <label for="regEmail" class="form-label">Email address</label>
+                  <input type="email" class="form-control" id="regEmail"
+                         placeholder="you@example.com" autocomplete="email">
+                </div>
+
+                <div class="col-12">
+                  <label for="regEvent" class="form-label">Choose an event</label>
+                  <select class="form-select" id="regEvent">
+                    <option value="">Please select an event</option>
+                    <option value="Green Technology Workshop 2026">Green Technology Workshop 2026 &mdash; 10 Oct</option>
+                    <option value="Renewable Energy Seminar">Renewable Energy Seminar &mdash; 24 Oct</option>
+                    <option value="Electric Vehicle Exhibition">Electric Vehicle Exhibition &mdash; 14 Nov</option>
+                    <option value="Sustainable Technology Challenge">Sustainable Technology Challenge &mdash; 5 Dec</option>
+                  </select>
+                </div>
+
+                <div class="col-12 d-flex flex-wrap gap-2">
+                  <button type="submit" class="btn btn-gtc-primary">
+                    Save my registration
+                  </button>
+                  <button type="button" class="btn btn-gtc-outline" id="regClearDraftBtn">
+                    Clear this form
+                  </button>
+                </div>
+
+              </div>
+            </form>
+
+            <!-- Validation and success messages appear here -->
+            <p class="gtc-note mb-0 mt-3" id="regMessage" style="display: none;"></p>
+
+            <!-- Saved registrations - localStorage -->
+            <div class="gtc-saved">
+              <div class="gtc-saved__head">
+                <h3>My registrations</h3>
+                <button type="button" class="btn btn-gtc-outline btn-sm" id="regClearAllBtn">
+                  Clear all
+                </button>
+              </div>
+              <ul class="gtc-saved-list" id="regList"></ul>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+
+          <div class="gtc-mini-card mb-4">
+            <span class="gtc-mini-card__icon"><i class="bi bi-hourglass-split"></i></span>
+            <h3>Why the draft disappears</h3>
+            <p>
+              Your half-finished form is held in <strong>sessionStorage</strong>,
+              which the browser clears the moment this tab is closed.
+            </p>
+            <p class="mb-0">
+              That is deliberate. The draft contains your name and email
+              address, and on a shared computer &mdash; a library machine, for
+              example &mdash; that should not still be sitting there for the
+              next person.
+            </p>
+          </div>
+
+          <div class="gtc-mini-card">
+            <span class="gtc-mini-card__icon"><i class="bi bi-hdd"></i></span>
+            <h3>Why the saved list stays</h3>
+            <p>
+              Once you submit, the registration moves into
+              <strong>localStorage</strong>, which has no expiry. Close the
+              browser, come back next week, and your list is still here.
+            </p>
+            <p class="mb-0">
+              Nothing is sent to a server. This site is a student coursework
+              project with no backend, so your details never leave your own
+              device.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       SOCIAL MEDIA
+       ======================================================================== -->
+  <section class="gtc-section" id="follow">
+    <div class="container">
+
+      <div class="gtc-section-intro">
+        <p class="gtc-eyebrow">Stay in touch</p>
+        <h2>Follow Green Technology Club</h2>
+        <p>
+          Event reminders, session notes and project updates are posted on our
+          social channels.
+        </p>
+      </div>
+
+      <div class="row g-4">
+
+        <!-- Facebook Page Plugin -->
+        <div class="col-lg-5">
+          <h3 class="h5 mb-3">Our Facebook page</h3>
+          <div class="gtc-fb-box">
+
+            <div class="fb-page"
+                 data-href="https://www.facebook.com/share/1BGQavSA6r/"
+                 data-tabs="timeline"
+                 data-width="500"
+                 data-height="400"
+                 data-small-header="false"
+                 data-adapt-container-width="true"
+                 data-hide-cover="false"
+                 data-show-facepile="true">
+              <blockquote cite="https://www.facebook.com/share/1BGQavSA6r/" class="fb-xfbml-parse-ignore">
+                <a href="https://www.facebook.com/share/1BGQavSA6r/">Green Technology Club on Facebook</a>
+              </blockquote>
+            </div>
+
+          </div>
+          <p class="gtc-note">
+            <strong>How this works:</strong> this is Facebook's own Page
+            Plugin. The Facebook SDK is loaded at the bottom of this page and
+            replaces the block above with a live view of our page, so the
+            posts shown come straight from Facebook rather than being copied
+            here by hand.
+          </p>
+        </div>
+
+        <!-- YouTube -->
+        <div class="col-lg-7">
+          <h3 class="h5 mb-3">Watch: green technology explained</h3>
+
+          <div class="gtc-embed">
+            <iframe src="https://www.youtube.com/embed/TCtIRAFyTIY"
+                    title="Green technology explained"
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+          </div>
+
+          <h3 class="h5 mt-4 mb-3">Find us elsewhere</h3>
+          <div class="gtc-follow">
+            <a href="https://www.facebook.com/share/1BGQavSA6r/" target="_blank" rel="noopener">
+              <i class="bi bi-facebook"></i> Facebook
+            </a>
+            <a href="https://www.instagram.com/green_tech_club" target="_blank" rel="noopener">
+              <i class="bi bi-instagram"></i> Instagram
+            </a>
+            <a href="https://www.youtube.com/@green_tech_club" target="_blank" rel="noopener">
+              <i class="bi bi-youtube"></i> YouTube
+            </a>
+          </div>
+          <p class="gtc-note">
+            Instagram no longer offers an embeddable timeline widget without a
+            registered developer application, so it is listed as a link rather
+            than an embedded plugin.
+          </p>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       CONTACT / JOIN US
+       ======================================================================== -->
+  <section class="gtc-section gtc-section--pale" id="join">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+
+        <div class="col-lg-6">
+          <p class="gtc-eyebrow">Join us</p>
+          <h2>How membership works</h2>
+          <p class="mt-3">
+            There is no membership fee and no application to be approved.
+            Register for an event above, turn up, and you are part of it.
+          </p>
+          <p class="mb-0">
+            If you would rather ask something first, contact any of the
+            committee members listed on the About Us page, or message the
+            club through the social channels above.
+          </p>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="row g-3">
+
+            <div class="col-sm-6">
+              <div class="gtc-mini-card h-100">
+                <span class="gtc-mini-card__icon"><i class="bi bi-1-circle"></i></span>
+                <h3>Register</h3>
+                <p>Pick an event above and save your place.</p>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="gtc-mini-card h-100">
+                <span class="gtc-mini-card__icon"><i class="bi bi-2-circle"></i></span>
+                <h3>Turn up</h3>
+                <p>Come to the session. Bring nothing but questions.</p>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="gtc-mini-card h-100">
+                <span class="gtc-mini-card__icon"><i class="bi bi-3-circle"></i></span>
+                <h3>Get involved</h3>
+                <p>Join a project team or help run the next event.</p>
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="gtc-mini-card h-100">
+                <span class="gtc-mini-card__icon"><i class="bi bi-4-circle"></i></span>
+                <h3>Lead something</h3>
+                <p>Prepare a session on a topic you want to understand.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       CALL TO ACTION
+       ======================================================================== -->
+  <section class="gtc-section gtc-on-dark">
+    <div class="container">
+      <div class="gtc-cta">
+        <h2>Still deciding?</h2>
+        <p>
+          Have a look at what we cover before you commit to anything. The
+          topic pages are written for people starting from zero.
+        </p>
+        <a class="btn btn-gtc-accent" href="about.html">Read about the club</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+<!-- ==========================================================================
+     SHARE MODAL
+     The links inside are built by JavaScript using encodeURIComponent().
+     ========================================================================== -->
+<div class="modal fade" id="shareModal" tabindex="-1"
+     aria-labelledby="shareModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h2 class="modal-title h5" id="shareModalLabel">Share this event</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <p class="mb-3">
+          Tell someone about <strong id="shareEventName">this event</strong>.
+        </p>
+
+        <div class="gtc-share-list">
+          <a id="shareFacebook" href="#" target="_blank" rel="noopener">
+            <i class="bi bi-facebook"></i> Facebook
+          </a>
+          <a id="shareX" href="#" target="_blank" rel="noopener">
+            <i class="bi bi-twitter-x"></i> X
+          </a>
+          <a id="shareWhatsapp" href="#" target="_blank" rel="noopener">
+            <i class="bi bi-whatsapp"></i> WhatsApp
+          </a>
+          <a id="shareTelegram" href="#" target="_blank" rel="noopener">
+            <i class="bi bi-telegram"></i> Telegram
+          </a>
+        </div>
+
+        <p class="gtc-session__row mb-2">
+          <span>Encoded message:</span>
+        </p>
+        <code class="gtc-encoded" id="shareEncoded"></code>
+
+        <p class="gtc-note mb-0">
+          Each link carries the message as part of its address.
+          <strong>encodeURIComponent()</strong> converts characters that have a
+          special meaning in a URL into safe codes &mdash; a space becomes
+          %20 and a colon becomes %3A &mdash; so the link cannot be broken by
+          the text inside it.
+        </p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-gtc-outline btn-sm" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ==========================================================================
+     FOOTER  (identical on all six pages)
+     ========================================================================== -->
+<footer class="gtc-footer">
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-lg-4">
+        <div class="gtc-footer__brand">
+          <svg class="gtc-logo" viewBox="0 0 40 40" aria-hidden="true">
+            <path d="M20 35C8 29 6 14 20 5C34 14 32 29 20 35Z" fill="none" stroke="#66BB6A" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M20 34V9M20 24L12.5 19M20 17.5L27.5 12.5" stroke="#66BB6A" stroke-width="1.6" stroke-linecap="round"/>
+            <circle cx="12.5" cy="19" r="2.2" fill="#F2A900"/>
+            <circle cx="27.5" cy="12.5" r="2.2" fill="#F2A900"/>
+          </svg>
+          Green Technology Club
+        </div>
+        <p>
+          A proposed student club promoting renewable energy, electric
+          vehicles, smart cities and sustainable technology on campus.
+        </p>
+      </div>
+
+      <div class="col-6 col-lg-2">
+        <h4>Explore</h4>
+        <ul class="gtc-footer__list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="events.html">Events</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-lg-3">
+        <h4>Topics</h4>
+        <ul class="gtc-footer__list">
+          <li><a href="renewable.html">Renewable Energy</a></li>
+          <li><a href="ev.html">Electric Vehicles</a></li>
+          <li><a href="smart-city.html">Smart Cities</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-3">
+        <h4>Follow us</h4>
+        <p class="mb-0">Event reminders and project updates are posted here.</p>
+        <div class="gtc-footer__social">
+          <a href="https://www.facebook.com/share/1BGQavSA6r/" target="_blank" rel="noopener" aria-label="Green Technology Club on Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="https://www.instagram.com/green_tech_club" target="_blank" rel="noopener" aria-label="Green Technology Club on Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="https://www.youtube.com/@green_tech_club" target="_blank" rel="noopener" aria-label="Green Technology Club on YouTube"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="gtc-footer__bottom">
+      <div class="d-flex flex-wrap justify-content-between gap-2">
+        <p>&copy; <span id="footerYear">2026</span> Green Technology Club.</p>
+        <button type="button" class="gtc-footer__reset" id="cookieResetBtn">
+          Reset cookie preferences
+        </button>
+      </div>
+      <p class="gtc-disclaimer">
+        This website was created as a student coursework project. The club
+        described here is a proposal and is not an officially registered
+        organisation. Events listed above are illustrative.
+      </p>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ==========================================================================
+     COOKIE NOTICE  (identical on all six pages, hidden until needed)
+     ========================================================================== -->
+<div class="gtc-cookie-banner" id="cookieBanner" role="region" aria-label="Cookie notice" hidden>
+  <div class="container">
+    <div class="gtc-cookie-banner__inner">
+      <p class="gtc-cookie-banner__text">
+        <i class="bi bi-shield-check"></i>
+        This website uses cookies to improve your browsing experience and to
+        remember your preferences on your next visit.
+      </p>
+      <div class="gtc-cookie-banner__actions">
+        <button type="button" class="btn btn-gtc-accent" id="cookieAcceptBtn">Accept</button>
+        <button type="button" class="gtc-cookie-banner__dismiss" id="cookieDismissBtn">Not now</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Facebook SDK - required by the Facebook Page Plugin above -->
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous"
+        src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v19.0"></script>
+
+<!-- Scripts: jQuery first, then Bootstrap, then our own file -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/script.js"></script>
+
+</body>
+</html>
